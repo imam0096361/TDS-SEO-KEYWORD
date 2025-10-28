@@ -1,8 +1,10 @@
 {
   "name": "copy-of-the-daily-star:-ai-keyword-strategist",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "author": "DS IT - The Daily Star",
+  "copyright": "Copyright © 2025 DS IT - The Daily Star. All rights reserved.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

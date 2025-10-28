@@ -5,6 +5,8 @@
 # The Daily Star - AI Keyword Strategist
 ## 🇬🇧 English + 🇧🇩 বাংলা (Bangla) - Dual Language Support
 
+**© 2025 Developed by DS IT - The Daily Star**
+
 An AI-powered tool for **The Daily Star** (English + Bangla editions) that analyzes news article drafts to generate primary, secondary, and long-tail keywords optimized for ranking #1 on Google. Features competitive analysis based on the Bangladesh news media landscape with **BILINGUAL support** for both English and Bengali content.
 
 View your app in AI Studio: https://ai.studio/apps/drive/1qm1paoS3d2Jvq_A1O_6P92RBRliXKEtT
@@ -152,3 +154,17 @@ View your app in AI Studio: https://ai.studio/apps/drive/1qm1paoS3d2Jvq_A1O_6P92
 - **Mixed Content** → Automatically detects and optimizes for both
 
 Simply paste your article - the system AUTO-DETECTS the language and applies the appropriate strategy!
+
+---
+
+## 📜 Copyright & License
+
+**© 2025 DS IT - The Daily Star. All rights reserved.**
+
+This software is proprietary to The Daily Star and developed by **DS IT** (The Daily Star IT Department).
+
+**For internal use only.** For questions or support, please contact the DS IT team.
+
+---
+
+**Made with ❤️ by DS IT for The Daily Star journalists 🇧🇩**
