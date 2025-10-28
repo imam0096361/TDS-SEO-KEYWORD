@@ -1,0 +1,5 @@
+{
+  "name": "Copy of The Daily Star: AI Keyword Strategist",
+  "description": "An internal AI-powered tool for The Daily Star that analyzes news article drafts to generate primary, secondary, and long-tail keywords optimized for ranking #1 on Google. It performs competitive analysis based on the Bangladesh news media landscape to provide authentic, rankable keyword suggestions.",
+  "requestFramePermissions": []
+}
