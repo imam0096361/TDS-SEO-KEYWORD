@@ -127,12 +127,13 @@ export const generateKeywordsWithOpenAI = async (
     }
     
     // Validate the structure and content
-    const validationResult = validateKeywordResult(parsedResult);
+    const isValid = validateKeywordResult(parsedResult);
     
-    if (!validationResult.isValid) {
-      console.error("Validation failed:", validationResult.errors);
+    if (!isValid) {
+      console.error("Validation failed - OpenAI returned incomplete keyword data");
       throw new Error(
-        `OpenAI returned incomplete keyword data:\n\n${validationResult.errors.join('\n')}\n\n` +
+        `OpenAI returned incomplete keyword data. ` +
+        `Please check the console for details. ` +
         `This usually means the article is too short or the AI needs more context. ` +
         `Try using "Deep Analysis Mode" for better results, or ensure your article is at least 200+ words.`
       );
