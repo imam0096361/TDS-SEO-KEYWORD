@@ -232,14 +232,21 @@ const App: React.FC = () => {
       <main className="container mx-auto px-4 py-8 md:py-12">
         {/* Header */}
         <header className="text-center mb-10">
-          <div className="flex items-center justify-center gap-3 mb-2">
-            <SparklesIcon className="w-8 h-8 text-brand-primary" />
-            <h1 className="text-4xl md:text-5xl font-extrabold text-brand-light">
-              The Daily Star
-            </h1>
+          <div className="flex flex-col items-center justify-center gap-4 mb-2">
+            <img 
+              src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Logo_of_The_Daily_Star.svg" 
+              alt="The Daily Star Logo" 
+              className="h-16 md:h-20 w-auto"
+            />
+            <div className="flex items-center gap-2">
+              <SparklesIcon className="w-6 h-6 text-brand-primary" />
+              <h2 className="text-2xl md:text-3xl font-bold text-brand-light">
+                AI Keyword Strategist
+              </h2>
+            </div>
           </div>
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            AI Keyword Strategist
+          <p className="text-base text-gray-400 max-w-2xl mx-auto mt-2">
+            🇬🇧 English + 🇧🇩 বাংলা - Bilingual SEO Keyword Generation
           </p>
         </header>
 
