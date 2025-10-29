@@ -607,9 +607,9 @@ const App: React.FC = () => {
       </main>
 
       {/* Copyright Footer */}
-      <footer className="mt-12 pt-6 border-t border-gray-200">
-        <p className="text-center text-sm text-gray-600">
-          © {new Date().getFullYear()} Developed by <span className="font-semibold text-blue-600">DS IT</span> - The Daily Star
+      <footer className="mt-12 pt-6 border-t border-gray-800/50">
+        <p className="text-center text-sm text-gray-500">
+          © {new Date().getFullYear()} All rights reserved
         </p>
       </footer>
     </div>
