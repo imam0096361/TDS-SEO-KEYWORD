@@ -238,15 +238,19 @@ const generateBanglaPrompt = (articleContent: string, contentType: string, langu
           * "দেশীয় বনাম আন্তর্জাতিক স্বর্ণের দাম" (domestic vs international prices)
         - BOTH scripts for all keywords
     
-    **C. USER QUERY VARIATIONS (ব্যবহারকারী অনুসন্ধান বৈচিত্র):**
-        - Quantity: 3-30 phrases (VERY FLEXIBLE - extract naturally, don't invent)
-        - Length: ANY length (3-20+ words) - match NATURAL Bangla queries
+    **C. USER QUERY VARIATIONS (ব্যবহারকারী অনুসন্ধান বৈচিত্র - Google Policy):**
+        - Quantity: 3-30 phrases (FLEXIBLE - based on search demand)
+        - Length: ANY length (3-25+ words) - Bangla queries are 40% LONGER
+        - **GOOGLE POLICY:** Include verbatim + HIGH-search Bangla synonyms
         - Bangla queries are LONGER and more conversational
         - Examples:
-          * "দেশীয় দাম বৈশ্বিক প্রবণতার সাথে ঘনিষ্ঠভাবে সংযুক্ত" (verbatim from article)
-          * "বাংলাদেশে বার্ষিক গার্হস্থ্য চাহিদা ২০ থেকে ৪০ টনের মধ্যে" (with statistics)
-          * "চোরাচালান উল্লেখযোগ্য রাজস্ব ক্ষতির কারণ" (complete thoughts)
-        - BOTH scripts required
+          * "দেশীয় দাম বৈশ্বিক প্রবণতার সাথে ঘনিষ্ঠভাবে সংযুক্ত" (verbatim)
+          * "বাংলাদেশে স্বর্ণের মূল্য আন্তর্জাতিক বাজারের সাথে" (high-search synonym)
+          * "বাংলাদেশে বার্ষিক গার্হস্থ্য চাহিদা ২০ থেকে ৪০ টনের মধ্যে" (statistic)
+          * "প্রতি বছর বাংলাদেশে সোনার চাহিদা কত টন" (user search variation)
+          * "চোরাচালান উল্লেখযোগ্য রাজস্ব ক্ষতির কারণ" (exact)
+          * "অবৈধ স্বর্ণ ব্যবসা সরকারের রাজস্ব ক্ষতি" (semantic variation)
+        - BOTH scripts required (Bangla + English transliteration)
     
     **D. SEMANTIC CONTEXT KEYWORDS (বাংলা প্রসঙ্গ শব্দ):**
         - Quantity: 5-8 keywords
@@ -379,23 +383,25 @@ const generateBanglaPrompt = (articleContent: string, contentType: string, langu
     
     **REMEMBER: Output ONLY the JSON object above. No markdown, no wrapper, no extra text.**
 
-    **CRITICAL FOR THE DAILY STAR BANGLA - MODERN APPROACH:**
-    1. ⚠️ **QUALITY OVER QUANTITY** - Extract what EXISTS in the article, don't force counts
-    2. ❌ NO word count limits - ✅ Bangla users search LONGER (40% more than English)
-    3. EVERY keyword in BOTH Bangla script AND English transliteration (MANDATORY)
-    4. Target Focus = ANY length that captures intent (can be 1-15+ words in Bangla)
-    5. Supporting Topics = THEMES/CONCEPTS in Bangla, not just entity dumps
-    6. User Queries = NATURAL conversational Bangla (embrace 10-20 word phrases!)
-    7. Code-switching is NATURAL: "বাংলাদেশ economy" is how people search
-    8. Bangla Featured Snippets 70% EASIER - massive opportunity!
-    9. Voice search in Bangla growing 200%/year - optimize for questions
-    10. Proper Unicode (U+0980-U+09FF) MANDATORY
-    11. Numbers in BOTH scripts: "২০২৪" and "2024"
-    12. Dhaka standard preferred (শুদ্ধ Bangla)
-    13. Bilingual meta tags = DUAL visibility (Bangla + English searches)
-    14. ❌ NO invented keywords - extract verbatim from article only
-    15. Short article? Fewer keywords is CORRECT. Long article? More keywords is natural.
-    16. Focus on WHAT users want to know, not arbitrary categorization
+    **CRITICAL FOR THE DAILY STAR BANGLA - GOOGLE POLICY APPROACH:**
+    1. 🎯 **GOOGLE RANKS BY INTENT** - Include high-search Bangla synonyms & variations!
+    2. ⚠️ **QUALITY OVER QUANTITY** - Extract what EXISTS + high-volume Bangla variations
+    3. ✅ **দাম vs মূল্য vs রেট:** Include ALL synonym variations (users search differently)
+    4. 🔄 **Semantic Bangla:** "চোরাচালান" = "অবৈধ ব্যবসা" = "illegal trade" (all rank)
+    5. 📊 **Think Bangla Autocomplete:** What do users TYPE in বাংলা Google?
+    6. ❌ NO word count limits - ✅ Bangla users search LONGER (40% more than English)
+    7. ✅ EVERY keyword in BOTH Bangla script AND English transliteration (MANDATORY)
+    8. 🌐 **Bangla variations matter:** "সোনার দাম" + "স্বর্ণের মূল্য" (both high-search)
+    9. 📈 **Prioritize HIGH search volume Bangla queries** (even if different wording)
+    10. 🔍 **Related Bangla Searches:** Check what Bangladeshis actually search
+    11. 🗣️ **Voice search Bangla:** Growing 200%/year - natural questions
+    12. 🎪 **Bangla Featured Snippets:** 70% EASIER - include answer variations
+    13. 🔤 **Code-switching is NATURAL:** "বাংলাদেশ economy" is how people search
+    14. 🔢 **Numbers in BOTH scripts:** "২০২৪" and "2024" (users search both)
+    15. 📝 **Dhaka standard preferred:** শুদ্ধ Bangla + colloquial high-search terms
+    16. 🌍 **Bilingual meta tags:** DUAL visibility (Bangla + English searches)
+    17. 📏 **Short article? Fewer keywords. Long article? More keywords. = Both CORRECT**
+    18. 🎯 **MISSION:** Capture ALL Bangla search variations (formal + colloquial + synonyms)
 
     **Your Mission:** Make দ্য ডেইলি স্টার বাংলা rank #1 by understanding Bangla SEARCH INTENT and natural language patterns. Execute with modern বাংলা SEO expertise!
     `;
@@ -466,63 +472,100 @@ const generatePrompt = (articleContent: string, contentType: string): string => 
     **MODERN SEO PRINCIPLE:** Google ranks content by SEARCH INTENT and SEMANTIC RELEVANCE, not word count.
     Organize keywords by HOW and WHY users search, not by arbitrary length categories.
 
-    **A. TARGET FOCUS KEYWORDS (Primary Intent - What This Article Is About):**
-        - **Quantity:** 1-10 keywords (VERY FLEXIBLE - extract what exists, don't force it)
+    **A. TARGET FOCUS KEYWORDS (Primary Search Intent - Google's Core Ranking Topics):**
+        - **Quantity:** 1-10 keywords (FLEXIBLE - focus on HIGH search volume variations)
         - **Length:** ANY length that captures complete user intent (can be 1-10+ words)
-        - **SEO Purpose:** Define the core topic and primary search intent this article serves
-        - **Modern Rules:**
-          * Extract the EXACT topic users would search for (don't limit by word count)
-          * Include the main headline topic with natural modifiers
-          * Can be broad ("gold prices") OR specific ("why Bangladesh gold prices increased in 2024")
-          * Focus on INTENT, not length: What problem/question does this article solve?
-          * Include Bangladesh-specific context if it's core to the topic
-          * Each keyword should represent a distinct search intent
-        - **Google Factors:** Primary intent matching, topic authority, user satisfaction signals
+        - **SEO Purpose:** Core topics users ACTUALLY search for on Google (high volume + relevance)
+        - **GOOGLE POLICY - HIGH VOLUME INTENT:**
+          * Focus on what users TYPE IN GOOGLE SEARCH, not just article phrasing
+          * Include HIGH SEARCH VOLUME variations (even if different wording)
+          * Prioritize Google Autocomplete/Suggest versions
+          * Think: "Top 5 ways users would search for this topic"
+        - **Modern Rules (Google's Actual Ranking):**
+          ✅ **Main topic (exact):** "gold prices in Bangladesh"
+          ✅ **High-volume synonym:** "Bangladesh gold rate today" (more searches)
+          ✅ **Specific intent:** "why gold prices rising in Bangladesh 2024"
+          ✅ **Variation:** "gold price increase Bangladesh" (how users actually search)
+          ✅ **Related high-volume:** "Bangladesh gold market trends"
+        - **What to Include:**
+          * Main headline topic (baseline)
+          * High-search synonyms (price = rate = cost)
+          * Google Autocomplete suggestions for this topic
+          * Common user search patterns
+          * Specific + broad versions
+          * Bangladesh-specific high-volume queries
+        - **Google Factors:** Search volume, primary intent matching, topic authority, CTR signals
         - **Examples:** 
-          * "gold prices in Bangladesh" (informational)
-          * "why are gold prices rising in Bangladesh 2024" (informational - specific)
-          * "Bangladesh gold market analysis" (commercial investigation)
-          * "impact of smuggling on Bangladesh economy" (informational - cause)
+          * "gold prices in Bangladesh" (exact topic)
+          * "Bangladesh gold rate" (HIGH search volume synonym)
+          * "why are gold prices rising in Bangladesh 2024" (specific question)
+          * "gold price increase Bangladesh today" (user search pattern)
+          * "Bangladesh bullion market" (industry term, high intent)
 
-    **B. SUPPORTING TOPIC KEYWORDS (Content Depth - What Sub-Topics Are Covered):**
-        - **Quantity:** 2-20 keywords (VERY FLEXIBLE - varies by article complexity and length)
-        - **Length:** ANY length (2-8+ words) - focus on complete topics, not word limits
-        - **SEO Purpose:** Demonstrate topical breadth, semantic coverage, subject matter expertise
-        - **Modern Rules:**
-          * Extract THEMES and SUB-TOPICS, not just entities
-          * Each keyword = a distinct concept or angle covered in the article
-          * Include market dynamics, trends, causes, effects, policies
-          * Industry terminology and professional concepts
-          * Related topics that provide context
-          * Can include key statistics as topic phrases ("20-40 tonnes annual demand")
-        - **Google Factors:** Topical authority, semantic relevance, content depth signals
+    **B. SUPPORTING TOPIC KEYWORDS (Sub-Topics & Related Searches):**
+        - **Quantity:** 2-20 keywords (FLEXIBLE - based on content + related search demand)
+        - **Length:** ANY length (2-8+ words) - focus on complete topics
+        - **SEO Purpose:** Capture related topics users search + demonstrate expertise
+        - **GOOGLE POLICY - RELATED SEARCHES:**
+          * Include article themes AND high-search related topics
+          * Check Google's "Related Searches" / "People Also Search For"
+          * Semantic variations of sub-topics
+          * Think: "What else would users search if interested in this topic?"
+        - **Modern Rules (Topic Coverage + Search Demand):**
+          ✅ **Article themes:** "global gold market volatility"
+          ✅ **High-search related:** "international gold prices today" (users also search this)
+          ✅ **Synonym variations:** "taka devaluation" + "Bangladesh currency depreciation"
+          ✅ **Related topics:** "gold import regulations" (related search)
+          ✅ **Market dynamics:** "gold smuggling impact" + "illegal gold trade Bangladesh"
+        - **What to Include:**
+          * Themes/sub-topics from article (baseline)
+          * Related searches users make
+          * Synonym variations of key concepts
+          * Industry terminology (both formal and common terms)
+          * Market dynamics, trends, causes, effects
+          * Policy and regulatory keywords
+          * Related questions users search
+        - **Google Factors:** Topical authority, semantic breadth, related search matching, content depth
         - **Examples:** 
-          * "global gold market trends"
-          * "taka devaluation effects"
-          * "gold smuggling Bangladesh"
-          * "domestic vs international gold prices"
-          * "Bangladesh Bank monetary policy"
-          * "consumer gold demand patterns"
+          * "global gold market trends" (article theme)
+          * "international bullion prices" (high-search synonym)
+          * "taka devaluation impact" (article concept)
+          * "Bangladesh currency value gold" (related search)
+          * "gold smuggling Bangladesh" (exact)
+          * "illegal gold trade revenue loss" (semantic variation)
+          * "Bangladesh Bank gold policy" (related authority topic)
 
-    **C. USER QUERY VARIATIONS (How Real People Search This Topic):**
-        - **Quantity:** 3-30 phrases (VERY FLEXIBLE - extract what exists naturally, don't invent)
+    **C. USER QUERY VARIATIONS (How Real People Actually Search - Google Policy):**
+        - **Quantity:** 3-30 phrases (VERY FLEXIBLE - based on search demand, not article length)
         - **Length:** ANY length that matches natural search queries (3-15+ words)
-        - **SEO Purpose:** Match actual search queries, capture long-tail traffic, Featured Snippets
-        - **Modern Rules:**
-          * Extract phrases EXACTLY as they appear in article (verbatim is powerful)
-          * Focus on complete thoughts and natural language
-          * Include questions, statements, and conversational phrases
-          * Statistics with context (not just numbers)
-          * Cause-and-effect relationships
-          * Direct quotes that answer common questions
-          * NO arbitrary word count limits - if users search it, include it
-        - **Google Factors:** Natural language processing (BERT/MUM), voice search, Featured Snippet eligibility, query matching
+        - **SEO Purpose:** Capture ACTUAL user search queries - both verbatim AND high-search synonyms
+        - **CRITICAL GOOGLE POLICY - INTENT MATCHING:**
+          * Google ranks by INTENT, not exact phrase matching
+          * Include BOTH verbatim phrases AND semantic variations/synonyms
+          * Prioritize queries with HIGH SEARCH VOLUME (even if not exact article words)
+          * Think: "How would users Google this topic?" not just "What's in the article?"
+        - **Modern Rules (Google's Actual Behavior):**
+          ✅ **Verbatim from article:** "annual domestic demand between 20 and 40 tonnes"
+          ✅ **Synonym variation:** "yearly gold consumption in Bangladesh 20-40 tons" (HIGH search volume)
+          ✅ **Google Suggest queries:** "Bangladesh gold demand statistics" (what users type)
+          ✅ **Related high-volume searches:** "how much gold does Bangladesh import"
+          ✅ **Question variations:** Both formal and conversational versions
+          ✅ **Semantic equivalents:** "smuggling" = "illegal gold trade" = "gold trafficking"
+        - **What to Include:**
+          * Verbatim phrases from article (baseline)
+          * High-search synonyms (gold = bullion, price = cost = rate)
+          * Google autocomplete suggestions (what users actually type)
+          * Related queries users search (Search Console data patterns)
+          * Semantic variations (same meaning, different words)
+          * Question rephrasing (multiple ways to ask same thing)
+        - **Google Factors:** Semantic search (BERT/MUM), query understanding, synonym recognition, intent matching
         - **Examples:** 
-          * "domestic prices closely aligned with global trends"
-          * "annual domestic demand between 20 and 40 tonnes"
-          * "smuggling causes significant revenue losses"
-          * "Gold Policy 2018 import regulations"
-          * "how global prices affect Bangladesh market"
+          * "domestic gold prices aligned with global trends" (verbatim)
+          * "Bangladesh gold rates follow international bullion market" (synonym - HIGH search)
+          * "annual gold demand Bangladesh 20 to 40 tonnes" (variation)
+          * "yearly gold consumption statistics Bangladesh" (Google Suggest query)
+          * "how much gold is imported to Bangladesh each year" (user question)
+          * "Bangladesh gold smuggling revenue loss" (semantic equivalent)
 
     **D. SEMANTIC CONTEXT KEYWORDS (What Google Expects to See):**
         - **Quantity:** 5-8 keywords
@@ -625,17 +668,21 @@ const generatePrompt = (articleContent: string, contentType: string): string => 
           * Missing keywords competitors rank for (content gaps)
           * Differentiating factors (exclusive sources, data, perspectives)
 
-    **7. QUALITY VERIFICATION:** Before outputting JSON, verify:
-        - Target Focus Keywords: 1-10 keywords (FLEXIBLE - extract what exists, quality over quantity)
-        - Supporting Topic Keywords: 2-20 keywords (FLEXIBLE - varies by article length/complexity)
-        - User Query Variations: 3-30 phrases (FLEXIBLE - extract naturally, don't force it)
-        - Semantic Context Keywords: 3-10 keywords (flexible)
-        - Question-Intent Keywords: 2-15 questions (flexible, based on content)
+    **7. QUALITY VERIFICATION (Google Policy Checklist):** Before outputting JSON, verify:
+        - Target Focus Keywords: 1-10 (include HIGH search volume variations)
+        - Supporting Topic Keywords: 2-20 (article topics + related searches)
+        - User Query Variations: 3-30 (BOTH verbatim + semantic variations)
+        - Semantic Context Keywords: 3-10 (synonyms and related terms)
+        - Question-Intent Keywords: 2-15 (multiple ways to ask same thing)
         - Named Entities: ALL extracted (comprehensive, typically 1-50+)
-        - All keywords/phrases extracted verbatim from article
+        - ✅ **Included synonyms?** (price/rate/cost, smuggling/illegal trade)
+        - ✅ **Included high-search variations?** (how users actually Google it)
+        - ✅ **Checked semantic equivalents?** (same meaning, different words)
+        - ✅ **Related searches covered?** (what users also search for)
+        - ✅ **Google Autocomplete patterns?** (what appears in suggestions)
         - No duplicates across categories
         - Each keyword has clear rationale and search intent
-        - **CRITICAL:** Quality beats quantity - extract what's ACTUALLY in the article, don't invent keywords to meet targets
+        - **CRITICAL:** Include article content + high-search variations (Google's intent matching)
 
     **8. OUTPUT FORMAT - CRITICAL:** 
     
@@ -740,19 +787,23 @@ const generatePrompt = (articleContent: string, contentType: string): string => 
     
     **REMEMBER: Output ONLY the JSON object above. No markdown, no wrapper, no extra text.**
     
-    **CRITICAL IMPERATIVES - MODERN SEO (2024-2025):**
-    1. ⚠️ **QUALITY OVER QUANTITY** - Extract what EXISTS, don't force keyword counts
-    2. ❌ STOP organizing by word count - ✅ START organizing by SEARCH INTENT
-    3. Target Focus keywords can be ANY length (1-10+ words) - capture complete user intent
-    4. Supporting Topics = THEMES/CONCEPTS, not just entity lists
-    5. User Query Variations = EXACTLY how people search (verbatim from article, any length)
-    6. Extract ALL entities separately - don't mix with topic keywords
-    7. Question keywords = Featured Snippet gold mines (complete, natural questions)
-    8. Bangladesh context is MANDATORY - local SEO dominates international
-    9. Meta tags must be compelling - CTR is a major ranking factor
-    10. ❌ NO invented keywords - extract verbatim from article only
-    11. Short article? Fewer keywords is CORRECT. Long article? More keywords is natural.
-    12. Focus on WHAT users want to know, not arbitrary categorization rules
+    **CRITICAL IMPERATIVES - GOOGLE'S ACTUAL POLICY (2024-2025):**
+    1. 🎯 **GOOGLE RANKS BY INTENT, NOT EXACT WORDS** - Include high-search synonyms!
+    2. ⚠️ **QUALITY OVER QUANTITY** - Extract what EXISTS + high-volume variations
+    3. ✅ **PRIMARY:** Focus on HIGH search volume variations (how users actually Google it)
+    4. ✅ **SECONDARY:** Include article topics + Google's "Related Searches"
+    5. ✅ **LONG-TAIL:** BOTH verbatim phrases AND semantic variations/synonyms
+    6. 📊 **Think like Google Autocomplete** - What do users TYPE in the search box?
+    7. 🔄 **Synonyms are POWERFUL:** price = rate = cost, smuggling = illegal trade
+    8. ❌ STOP limiting to "exact article words" - ✅ START thinking "search demand"
+    9. 🌐 **Google understands semantics:** "gold prices" ranks for "bullion rates"
+    10. 📈 **Prioritize HIGH search volume** even if different wording than article
+    11. 🔍 **Check Related Searches:** "People also search for" = keyword goldmine
+    12. 🇧🇩 **Bangladesh context:** Include both formal and colloquial search terms
+    13. ❓ **Question keywords:** Multiple ways users ask the same thing
+    14. 🎪 **Featured Snippets:** Need natural, complete answers (not just article quotes)
+    15. 📏 **Short article? Fewer keywords. Long article? More keywords. = Both CORRECT**
+    16. 🎯 **MISSION:** Capture ALL ways users would search for this topic (not just article wording)
     
     **Your mission:** Make The Daily Star rank #1 by understanding USER INTENT and SEMANTIC CONTEXT, not outdated word-count rules. Execute with modern SEO precision.
   `;
