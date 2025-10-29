@@ -74,11 +74,11 @@ const validateKeywordResult = (data: any): data is Omit<KeywordResult, 'searchRe
     return allValid;
   };
 
-  // Core required fields
+  // Core required fields with flexible modern quantities
   const coreValid = (
-    validateKeywordArray(data.primary, 3, 5, 'Primary keywords') &&
-    validateKeywordArray(data.secondary, 8, 12, 'Secondary keywords') &&
-    validateKeywordArray(data.longtail, 10, 15, 'Long-tail keywords') &&
+    validateKeywordArray(data.primary, 2, 5, 'Target Focus keywords (flexible: 2-5 based on article scope)') &&
+    validateKeywordArray(data.secondary, 5, 12, 'Supporting Topic keywords (flexible: 5-12 based on complexity)') &&
+    validateKeywordArray(data.longtail, 8, 20, 'User Query Variations (flexible: 8-20 based on content richness)') &&
     typeof data.competitorInsights === 'string' &&
     data.competitorInsights.trim().length > 0
   );
@@ -212,45 +212,71 @@ const generateBanglaPrompt = (articleContent: string, contentType: string, langu
        - Bangla Featured Snippets are 70% LESS competitive than English
        - Local Bangla content beats international in Google.com.bd
     
-    **Phase 2: BANGLA KEYWORD EXTRACTION (Same quantities as English)**
+    **Phase 2: INTENT-DRIVEN BANGLA KEYWORD EXTRACTION (Modern Approach)**
 
-    **A. PRIMARY KEYWORDS (প্রধান কীওয়ার্ড):**
-        - Quantity: EXACTLY 3-5
+    **MODERN BANGLA SEO:** Same intent-driven approach as English, but adapted for Bangla search behavior (40% longer queries, more conversational).
+
+    **A. TARGET FOCUS KEYWORDS (লক্ষ্য কীওয়ার্ড - মূল বিষয়):**
+        - Quantity: 2-5 keywords (flexible based on article)
+        - Length: ANY length in Bangla (can be 1-15+ words) - NO LIMITS
         - Provide BOTH: Bangla script + English transliteration
-        - Example: "সোনার দাম" (sonar dam - gold price), "বাংলাদেশ অর্থনীতি" (Bangladesh orthoniti)
-        - Word count: 1-3 words in Bangla
+        - Purpose: Core topic and primary search intent
+        - Examples: 
+          * "সোনার দাম" (sonar dam - gold price)
+          * "কেন বাংলাদেশে সোনার দাম বাড়ছে ২০২৪ সালে" (why gold prices rising Bangladesh 2024)
+          * "বাংলাদেশ সোনার বাজার বিশ্লেষণ" (Bangladesh gold market analysis)
+        - Remember: Bangla users search 40% longer - embrace complete phrases!
     
-    **B. SECONDARY KEYWORDS (গৌণ কীওয়ার্ড):**
-        - Quantity: EXACTLY 8-12
-        - ALL entities in Bangla: "বাংলাদেশ ব্যাংক" (Bangladesh Bank), "ঢাকা স্টক এক্সচেঞ্জ"
-        - Organizations: Full Bangla names with English in parentheses
-        - People: Bengali names properly spelled
-        - Places: "ঢাকা" (Dhaka), "চট্টগ্রাম" (Chittagong)
+    **B. SUPPORTING TOPIC KEYWORDS (সহায়ক বিষয় কীওয়ার্ড):**
+        - Quantity: 5-12 keywords (varies by complexity)
+        - Length: ANY length (2-10+ words in Bangla) - focus on THEMES
+        - Extract SUB-TOPICS and CONCEPTS, not just entities
+        - Examples:
+          * "বৈশ্বিক সোনার বাজার প্রবণতা" (global gold market trends)
+          * "টাকার অবমূল্যায়নের প্রভাব" (taka devaluation impact)
+          * "সোনা চোরাচালান বাংলাদেশ" (gold smuggling Bangladesh)
+          * "দেশীয় বনাম আন্তর্জাতিক স্বর্ণের দাম" (domestic vs international prices)
+        - BOTH scripts for all keywords
     
-    **C. LONG-TAIL KEYWORDS (দীর্ঘ-লেজ কীওয়ার্ড):**
-        - Quantity: EXACTLY 10-15
-        - Complete Bangla phrases (4-10 words - Bangla queries are longer!)
-        - Natural conversational Bangla
-        - Include question formats: "কেন সোনার দাম বাড়ছে বাংলাদেশে"
-        - Statistics in both scripts: "২০ থেকে ৪০ টন" (20 to 40 tons)
+    **C. USER QUERY VARIATIONS (ব্যবহারকারী অনুসন্ধান বৈচিত্র):**
+        - Quantity: 8-20 phrases (varies by content richness)
+        - Length: ANY length (3-20+ words) - match NATURAL Bangla queries
+        - Bangla queries are LONGER and more conversational
+        - Examples:
+          * "দেশীয় দাম বৈশ্বিক প্রবণতার সাথে ঘনিষ্ঠভাবে সংযুক্ত" (verbatim from article)
+          * "বাংলাদেশে বার্ষিক গার্হস্থ্য চাহিদা ২০ থেকে ৪০ টনের মধ্যে" (with statistics)
+          * "চোরাচালান উল্লেখযোগ্য রাজস্ব ক্ষতির কারণ" (complete thoughts)
+        - BOTH scripts required
     
-    **D. LSI KEYWORDS (বাংলা প্রসঙ্গ শব্দ):**
-        - Quantity: 5-8
-        - Related Bangla terms Google expects
-        - Synonyms in Bengali: "মূল্য" (price), "দাম" (cost), "মূল্যবৃদ্ধি" (price increase)
+    **D. SEMANTIC CONTEXT KEYWORDS (বাংলা প্রসঙ্গ শব্দ):**
+        - Quantity: 5-8 keywords
+        - Length: ANY length (1-6 words typically)
+        - Bangla synonyms and related terms
+        - Examples:
+          * "মূল্য" (price), "দাম" (cost), "মূল্যবৃদ্ধি" (price increase)
+          * "বুলিয়ন বাজার" (bullion market), "মূল্যবান ধাতু" (precious metals)
+        - BOTH scripts
     
-    **E. QUESTION KEYWORDS (প্রশ্ন-ভিত্তিক কীওয়ার্ড):**
-        - Quantity: 5-8
-        - Bangla question format: "কেন", "কীভাবে", "কী", "কোথায়", "কখন"
-        - Example: "কীভাবে সোনার দাম নির্ধারণ হয় বাংলাদেশে?"
-        - Bangla voice search optimized
+    **E. QUESTION-INTENT KEYWORDS (প্রশ্ন-ভিত্তিক কীওয়ার্ড):**
+        - Quantity: 5-10 questions
+        - Length: ANY length - complete, natural Bangla questions (4-25+ words)
+        - Bangla question words: "কেন", "কীভাবে", "কী", "কোথায়", "কখন", "কোন"
+        - Examples:
+          * "কেন বাংলাদেশে সোনার দাম বাড়ছে ২০২৪ সালে?" (why prices rising)
+          * "কীভাবে সোনার দাম নির্ধারণ করা হয় বাংলাদেশে?" (how determined)
+          * "চোরাচালান কীভাবে সোনার বাজারকে প্রভাবিত করে?" (smuggling impact)
+        - Voice search optimized, PAA targets
+        - BOTH scripts
     
-    **F. ENTITIES (সত্ত্বা):**
-        - ALL in Bangla script + English
-        - People: "আবদুর রউফ তালুকদার" (Abdur Rouf Talukder)
-        - Organizations: "বাংলাদেশ ব্যাংক" (Bangladesh Bank)
-        - Places: "ঢাকা" (Dhaka), proper Bengali spelling
-        - Events/Policies: "সোনা নীতি ২০১৮" (Gold Policy 2018)
+    **F. NAMED ENTITIES (সত্ত্বা - নামযুক্ত সংস্থা):**
+        - Quantity: ALL entities (5-20+) - comprehensive
+        - BOTH Bangla script + English transliteration MANDATORY
+        - Examples:
+          * "বাংলাদেশ ব্যাংক (Bangladesh Bank - Central Bank)"
+          * "আবদুর রউফ তালুকদার (Abdur Rouf Talukder - BAJUS Chairman)"
+          * "ঢাকা (Dhaka - Capital City)"
+          * "সোনা নীতি ২০১৮ (Gold Policy 2018 - Regulation)"
+        - Proper Bengali spelling essential
 
     **Phase 3: BANGLA META TAGS & SEO DELIVERABLES**
 
@@ -339,19 +365,22 @@ const generateBanglaPrompt = (articleContent: string, contentType: string, langu
     }
     \`\`\`
 
-    **CRITICAL FOR THE DAILY STAR BANGLA:**
-    1. EVERY keyword in BOTH Bangla script and English transliteration
-    2. Bangla queries are LONGER (4-10 words vs 3-6 in English)
-    3. Code-switching is NATURAL and should be included
-    4. Bangla Featured Snippets are EASIER to rank for
-    5. Voice search in Bangla is GROWING FASTEST
-    6. Proper Unicode rendering is MANDATORY
-    7. Regional dialects matter (Dhaka standard preferred)
-    8. Numbers in BOTH scripts when relevant
-    9. Competitor analysis against Bangla media REQUIRED
-    10. Bilingual meta tags give you DUAL visibility
+    **CRITICAL FOR THE DAILY STAR BANGLA - MODERN APPROACH:**
+    1. ❌ NO word count limits - ✅ Bangla users search LONGER (40% more than English)
+    2. EVERY keyword in BOTH Bangla script AND English transliteration (MANDATORY)
+    3. Target Focus = ANY length that captures intent (can be 1-15+ words in Bangla)
+    4. Supporting Topics = THEMES/CONCEPTS in Bangla, not just entity dumps
+    5. User Queries = NATURAL conversational Bangla (embrace 10-20 word phrases!)
+    6. Code-switching is NATURAL: "বাংলাদেশ economy" is how people search
+    7. Bangla Featured Snippets 70% EASIER - massive opportunity!
+    8. Voice search in Bangla growing 200%/year - optimize for questions
+    9. Proper Unicode (U+0980-U+09FF) MANDATORY
+    10. Numbers in BOTH scripts: "২০২৪" and "2024"
+    11. Dhaka standard preferred (শুদ্ধ Bangla)
+    12. Bilingual meta tags = DUAL visibility (Bangla + English searches)
+    13. Focus on WHAT users want to know, not arbitrary categorization
 
-    **Your Mission:** Make দ্য ডেইলি স্টার বাংলা rank #1 on Google Bangladesh for Bangla searches AND compete internationally. Execute with বাংলা expertise!
+    **Your Mission:** Make দ্য ডেইলি স্টার বাংলা rank #1 by understanding Bangla SEARCH INTENT and natural language patterns. Execute with modern বাংলা SEO expertise!
     `;
 };
 
@@ -415,88 +444,123 @@ const generatePrompt = (articleContent: string, contentType: string): string => 
        - Find semantic variations and synonyms actually used in Bangladesh
        - Identify topic gaps compared to ${competitorContext}
 
-    **Phase 2: KEYWORD EXTRACTION (Google Rank #1 Strategy)**
+    **Phase 2: INTENT-DRIVEN KEYWORD EXTRACTION (Google 2024-2025 Algorithm)**
 
-    **A. PRIMARY KEYWORDS (Head Terms - High Volume):**
-        - **Quantity:** EXACTLY 3-5 keywords
-        - **Word Count:** 1-3 words MAX
-        - **SEO Purpose:** Capture 80% of search volume, establish topical authority
-        - **Rules:**
-          * Include the main headline topic (verbatim from article)
-          * Add 2-4 related head terms that dominate the article
-          * Include Bangladesh-specific variants where relevant
-          * Consider plural/singular forms based on search behavior
-          * Check: Would users type this exact phrase in Google?
-        - **Google Factors:** High search volume, competitive, drives brand visibility
-        - **Example:** "gold price Bangladesh", "domestic gold demand", "international bullion market"
+    **MODERN SEO PRINCIPLE:** Google ranks content by SEARCH INTENT and SEMANTIC RELEVANCE, not word count.
+    Organize keywords by HOW and WHY users search, not by arbitrary length categories.
 
-    **B. SECONDARY KEYWORDS (Mid-tail - Entity-Based):**
-        - **Quantity:** EXACTLY 8-12 keywords
-        - **Word Count:** 2-5 words MAX
-        - **SEO Purpose:** Entity recognition, topical depth, semantic SEO coverage
-        - **Rules:**
-          * Extract ALL named entities (MANDATORY):
-            - People: Full names with titles/roles
-            - Organizations: Companies, government bodies, institutions
-            - Places: Cities, regions, landmarks (Bangladesh-specific)
-            - Events: Policies, conferences, announcements
-            - Products/Services: Specific offerings mentioned
-          * Include industry-specific terminology
-          * Add year/date qualifiers where relevant (e.g., "Gold Policy 2018")
-          * Include statistical references (e.g., "20 tonnes annual demand")
-        - **Google Factors:** Knowledge Graph entities, semantic relationships, E-E-A-T signals
-        - **Examples:** "Bangladesh Bank policy", "industry insiders analysis", "taka devaluation impact", "smuggling revenue losses"
+    **A. TARGET FOCUS KEYWORDS (Primary Intent - What This Article Is About):**
+        - **Quantity:** 2-4 keywords (flexible based on article scope)
+        - **Length:** ANY length that captures complete user intent (can be 1-10+ words)
+        - **SEO Purpose:** Define the core topic and primary search intent this article serves
+        - **Modern Rules:**
+          * Extract the EXACT topic users would search for (don't limit by word count)
+          * Include the main headline topic with natural modifiers
+          * Can be broad ("gold prices") OR specific ("why Bangladesh gold prices increased in 2024")
+          * Focus on INTENT, not length: What problem/question does this article solve?
+          * Include Bangladesh-specific context if it's core to the topic
+          * Each keyword should represent a distinct search intent
+        - **Google Factors:** Primary intent matching, topic authority, user satisfaction signals
+        - **Examples:** 
+          * "gold prices in Bangladesh" (informational)
+          * "why are gold prices rising in Bangladesh 2024" (informational - specific)
+          * "Bangladesh gold market analysis" (commercial investigation)
+          * "impact of smuggling on Bangladesh economy" (informational - cause)
 
-    **C. LONG-TAIL KEYWORDS (User Query Matching):**
-        - **Quantity:** EXACTLY 10-15 keywords
-        - **Word Count:** 4-8 words (complete phrases)
-        - **SEO Purpose:** Featured Snippets, voice search, zero-click results, high conversion
-        - **Rules:**
-          * Extract verbatim phrases that answer "how, what, why, when, where"
-          * Include complete statistics with context
-          * Capture cause-and-effect relationships
-          * Extract direct quotes and key findings
-          * Match natural language search patterns
-          * Prioritize phrases that could become Featured Snippets
-        - **Google Factors:** RankBrain natural language processing, voice search optimization, position zero targeting
-        - **Examples:** "domestic prices remain closely aligned with global trends", "annual domestic demand in Bangladesh stands between 20 tonnes and 40 tonnes"
+    **B. SUPPORTING TOPIC KEYWORDS (Content Depth - What Sub-Topics Are Covered):**
+        - **Quantity:** 6-10 keywords (varies by article complexity)
+        - **Length:** ANY length (2-8+ words) - focus on complete topics, not word limits
+        - **SEO Purpose:** Demonstrate topical breadth, semantic coverage, subject matter expertise
+        - **Modern Rules:**
+          * Extract THEMES and SUB-TOPICS, not just entities
+          * Each keyword = a distinct concept or angle covered in the article
+          * Include market dynamics, trends, causes, effects, policies
+          * Industry terminology and professional concepts
+          * Related topics that provide context
+          * Can include key statistics as topic phrases ("20-40 tonnes annual demand")
+        - **Google Factors:** Topical authority, semantic relevance, content depth signals
+        - **Examples:** 
+          * "global gold market trends"
+          * "taka devaluation effects"
+          * "gold smuggling Bangladesh"
+          * "domestic vs international gold prices"
+          * "Bangladesh Bank monetary policy"
+          * "consumer gold demand patterns"
 
-    **D. LSI KEYWORDS (Latent Semantic Indexing - Google's Expected Context):**
+    **C. USER QUERY VARIATIONS (How Real People Search This Topic):**
+        - **Quantity:** 10-15 phrases (varies by content richness)
+        - **Length:** ANY length that matches natural search queries (3-15+ words)
+        - **SEO Purpose:** Match actual search queries, capture long-tail traffic, Featured Snippets
+        - **Modern Rules:**
+          * Extract phrases EXACTLY as they appear in article (verbatim is powerful)
+          * Focus on complete thoughts and natural language
+          * Include questions, statements, and conversational phrases
+          * Statistics with context (not just numbers)
+          * Cause-and-effect relationships
+          * Direct quotes that answer common questions
+          * NO arbitrary word count limits - if users search it, include it
+        - **Google Factors:** Natural language processing (BERT/MUM), voice search, Featured Snippet eligibility, query matching
+        - **Examples:** 
+          * "domestic prices closely aligned with global trends"
+          * "annual domestic demand between 20 and 40 tonnes"
+          * "smuggling causes significant revenue losses"
+          * "Gold Policy 2018 import regulations"
+          * "how global prices affect Bangladesh market"
+
+    **D. SEMANTIC CONTEXT KEYWORDS (What Google Expects to See):**
         - **Quantity:** 5-8 keywords
-        - **Word Count:** 2-4 words
-        - **SEO Purpose:** Prove topical depth, avoid thin content penalties, semantic relevance signals
-        - **Rules:**
-          * Extract related concepts Google expects with main keywords
-          * Include synonyms and variations actually used in article
-          * Add contextual terms that support main topic
-          * Bangladesh-specific terminology variations
-        - **Google Factors:** BERT/MUM semantic understanding, content quality signals
-        - **Examples:** "bullion market trends", "precious metal prices", "gold trading patterns", "market volatility factors"
+        - **Length:** ANY length (1-6 words typically)
+        - **SEO Purpose:** Prove comprehensive topic coverage, semantic SEO, avoid thin content
+        - **Modern Rules:**
+          * Related concepts and synonyms Google associates with your main topic
+          * Industry terminology and co-occurring terms
+          * Contextual terms that signal expertise
+          * Variations of main keywords (synonyms, related phrases)
+          * Terms that often appear together in authoritative content
+        - **Google Factors:** Semantic understanding, topical authority, content quality signals
+        - **Examples:** 
+          * "bullion market", "precious metals", "gold trading"
+          * "market volatility", "price fluctuations"
+          * "import duties", "customs regulations"
+          * "commodity prices", "forex rates"
 
-    **E. QUESTION-BASED KEYWORDS (PAA & Featured Snippet Targeting):**
-        - **Quantity:** 5-8 keywords
-        - **Word Count:** 5-12 words (full questions)
-        - **SEO Purpose:** People Also Ask (PAA) boxes, FAQ rich results, voice search
-        - **Rules:**
-          * Frame as actual questions from article content
-          * Start with: "how", "what", "why", "when", "where", "who"
-          * Must be answerable by article content
-          * Match conversational search patterns
-          * Include Bangladesh/local context in questions
-        - **Google Factors:** Featured Snippets, PAA, voice search, Google Assistant
-        - **Examples:** "why are gold prices rising in Bangladesh", "how does smuggling affect gold market", "what is Bangladesh Gold Policy 2018"
+    **E. QUESTION-INTENT KEYWORDS (Featured Snippet & Voice Search Targets):**
+        - **Quantity:** 5-10 questions (based on content)
+        - **Length:** ANY length - complete, natural questions (4-20+ words)
+        - **SEO Purpose:** People Also Ask (PAA), Featured Snippets, voice search, conversational AI
+        - **Modern Rules:**
+          * Frame as ACTUAL questions a user would ask
+          * Must be directly answerable by your article content
+          * Use natural question words: why, how, what, when, where, who, which
+          * Include context (location, time, specifics)
+          * Conversational and natural language
+          * Each question = potential Featured Snippet opportunity
+        - **Google Factors:** Featured Snippets, PAA boxes, voice search, conversational search, Google Assistant
+        - **Examples:** 
+          * "why are gold prices rising in Bangladesh in 2024?"
+          * "how does smuggling affect Bangladesh gold market?"
+          * "what is the Gold Policy 2018?"
+          * "what factors influence gold prices in Bangladesh?"
+          * "how much gold does Bangladesh import annually?"
 
-    **F. ENTITY EXTRACTION (Knowledge Graph Alignment):**
-        - **Quantity:** All entities (no limit, extract comprehensively)
+    **F. NAMED ENTITIES (Knowledge Graph & E-E-A-T Signals):**
+        - **Quantity:** ALL entities (comprehensive extraction, typically 5-20+)
         - **Format:** Entity name + entity type
-        - **Purpose:** Google Knowledge Graph connection, authority signals
-        - **Rules:**
-          * People: Name + Role/Title
-          * Organizations: Official name + Type
-          * Places: Location + Country/Region
-          * Events: Name + Year
-          * Laws/Policies: Official name + Issuing body
-        - **Google Factors:** Knowledge Graph, entity-based search, E-E-A-T
+        - **SEO Purpose:** Knowledge Graph connection, E-E-A-T signals, entity-based ranking
+        - **Modern Rules:**
+          * Extract EVERY named entity mentioned
+          * People: Full names with titles/roles/affiliations
+          * Organizations: Official names (government, companies, institutions)
+          * Places: Cities, regions, countries, landmarks
+          * Events: Conferences, policies, announcements, dates
+          * Products/Services: Specific offerings, brands
+          * Laws/Regulations: Official policy names
+        - **Google Factors:** Knowledge Graph entities, entity-based search, E-E-A-T, authority signals
+        - **Examples:**
+          * "Bangladesh Bank (Central Bank)"
+          * "Abdur Rouf Talukder (BAJUS Chairman)"
+          * "Dhaka (Capital City)"
+          * "Gold Policy 2018 (Regulation)"
 
     **Phase 3: SEO OPTIMIZATION DELIVERABLES**
 
@@ -545,61 +609,87 @@ const generatePrompt = (articleContent: string, contentType: string): string => 
           * Differentiating factors (exclusive sources, data, perspectives)
 
     **7. QUALITY VERIFICATION:** Before outputting JSON, verify:
-        - Primary Keywords: EXACTLY 3-5 keywords
-        - Secondary Keywords: EXACTLY 8-12 keywords
-        - Long-tail Keywords: EXACTLY 10-15 keywords
-        - LSI Keywords: 5-8 keywords
-        - Question Keywords: 5-8 keywords
-        - Entities: ALL extracted (comprehensive)
-        - All keywords verbatim from article
+        - Target Focus Keywords: 2-5 keywords (each represents distinct primary intent)
+        - Supporting Topic Keywords: 5-12 keywords (varies by article complexity)
+        - User Query Variations: 8-20 phrases (varies by content richness)
+        - Semantic Context Keywords: 5-8 keywords
+        - Question-Intent Keywords: 5-10 questions
+        - Named Entities: ALL extracted (comprehensive, typically 5-20+)
+        - All keywords/phrases extracted verbatim from article
         - No duplicates across categories
+        - Each keyword has clear rationale and search intent
 
     **8. OUTPUT FORMAT:** Respond ONLY with a valid JSON object. No markdown, no extra text.
 
-    **COMPLETE JSON STRUCTURE (Google Rank #1 Strategy):**
+    **COMPLETE JSON STRUCTURE (Modern Intent-Driven SEO):**
     \`\`\`json
     {
       "primary": [
         { 
-          "term": "primary keyword 1", 
-          "rationale": "Verbatim from headline. High search volume. Broad informational intent.",
+          "term": "gold prices in Bangladesh", 
+          "rationale": "Core topic from headline. Primary informational intent. High search volume.",
           "searchIntent": "informational",
           "searchVolume": "high",
           "difficulty": "hard"
-        }
-        // 3-5 total, each with full details
-      ],
-      "secondary": [
+        },
         { 
-          "term": "secondary keyword 1", 
-          "rationale": "Named entity from article body. Medium search volume. Specific informational intent.",
+          "term": "why Bangladesh gold prices increased 2024", 
+          "rationale": "Specific intent variation. Answers main article question. Complete user query.",
           "searchIntent": "informational",
           "searchVolume": "medium",
           "difficulty": "medium"
         }
-        // 8-12 total - ALL entities, organizations, people, places, concepts
+        // 2-5 total - each represents distinct primary intent (NO word count limits)
+      ],
+      "secondary": [
+        { 
+          "term": "global gold market trends", 
+          "rationale": "Major sub-topic covered. Supporting context for main topic. Industry theme.",
+          "searchIntent": "informational",
+          "searchVolume": "medium",
+          "difficulty": "medium"
+        },
+        { 
+          "term": "taka devaluation impact on commodity prices", 
+          "rationale": "Key concept explaining price changes. Economic factor analyzed.",
+          "searchIntent": "informational",
+          "searchVolume": "medium",
+          "difficulty": "medium"
+        }
+        // 5-12 total - THEMES/SUB-TOPICS, not just entities (NO word count limits)
       ],
       "longtail": [
         { 
-          "term": "complete long phrase from article", 
-          "rationale": "Natural language query. Featured Snippet potential. High conversion intent.",
+          "term": "domestic prices remain closely aligned with global trends", 
+          "rationale": "Verbatim phrase from article. Natural language. Featured Snippet potential.",
+          "searchIntent": "informational",
+          "searchVolume": "low",
+          "difficulty": "easy"
+        },
+        { 
+          "term": "annual domestic demand in Bangladesh stands between 20 tonnes and 40 tonnes", 
+          "rationale": "Complete statistic with context. Specific user query match. Data-driven search.",
           "searchIntent": "informational",
           "searchVolume": "low",
           "difficulty": "easy"
         }
-        // 10-15 total - verbatim phrases, statistics, complete thoughts
+        // 8-20 total - ACTUAL user queries/phrases (NO word count limits - can be 3-20+ words)
       ],
       "lsiKeywords": [
-        { "term": "related context term", "rationale": "Semantic relevance signal for Google BERT/MUM" }
-        // 5-8 LSI terms
+        { "term": "bullion market", "rationale": "Related term Google associates with gold prices. Semantic signal." },
+        { "term": "precious metals trading", "rationale": "Industry context. Co-occurring concept in authoritative content." }
+        // 5-8 semantic context terms
       ],
       "entities": [
-        { "term": "Entity Name (Person/Org/Place/Event)", "rationale": "Knowledge Graph entity. E-E-A-T signal." }
-        // ALL entities comprehensively extracted
+        { "term": "Bangladesh Bank (Central Bank)", "rationale": "Knowledge Graph entity. E-E-A-T signal. Monetary authority." },
+        { "term": "Abdur Rouf Talukder (BAJUS Chairman)", "rationale": "Quoted expert. Authority signal. Industry leader." },
+        { "term": "Gold Policy 2018 (Regulation)", "rationale": "Referenced policy. Official regulation. Topical authority." }
+        // ALL entities (5-20+) - comprehensive extraction
       ],
       "questionKeywords": [
-        { "term": "why/how/what question from content?", "rationale": "PAA box target. Voice search optimized." }
-        // 5-8 question-based keywords
+        { "term": "why are gold prices rising in Bangladesh in 2024?", "rationale": "Main article question. PAA target. Voice search optimized." },
+        { "term": "how does smuggling affect the Bangladesh gold market?", "rationale": "Sub-topic question. Featured Snippet opportunity. Answerable by content." }
+        // 5-10 questions - complete, natural (NO word count limits)
       ],
       "competitorInsights": "Detailed comparison with ${competitorContext}. Unique angles: [X, Y]. Missing keywords: [A, B]. Competitive advantages: [P, Q].",
       "metaTitle": "Primary Keyword: Compelling Hook | The Daily Star (50-60 chars)",
@@ -620,15 +710,19 @@ const generatePrompt = (articleContent: string, contentType: string): string => 
     }
     \`\`\`
     
-    **CRITICAL IMPERATIVES FOR THE DAILY STAR REPORTERS:**
-    1. Extract EVERY entity, statistic, and quote - missing data = lost rankings
-    2. Bangladesh context is MANDATORY - local SEO wins against international outlets  
-    3. Question keywords = Featured Snippet opportunities = 3x traffic
-    4. Meta title/description MUST be compelling - 30% of ranking is CTR
-    5. LSI keywords prove topical authority - thin content gets penalized
-    6. All keywords VERBATIM from article - no invented terms
+    **CRITICAL IMPERATIVES - MODERN SEO (2024-2025):**
+    1. ❌ STOP organizing by word count - ✅ START organizing by SEARCH INTENT
+    2. Target Focus keywords can be ANY length (1-10+ words) - capture complete user intent
+    3. Supporting Topics = THEMES/CONCEPTS, not just entity lists
+    4. User Query Variations = EXACTLY how people search (verbatim from article, any length)
+    5. Extract ALL entities separately - don't mix with topic keywords
+    6. Question keywords = Featured Snippet gold mines (complete, natural questions)
+    7. Bangladesh context is MANDATORY - local SEO dominates international
+    8. Meta tags must be compelling - CTR is a major ranking factor
+    9. NO invented keywords - extract verbatim from article only
+    10. Focus on WHAT users want to know, not arbitrary categorization rules
     
-    **Your mission:** Make The Daily Star rank #1 on Google Bangladesh and compete internationally. Execute with precision.
+    **Your mission:** Make The Daily Star rank #1 by understanding USER INTENT and SEMANTIC CONTEXT, not outdated word-count rules. Execute with modern SEO precision.
   `;
 };
 
@@ -734,9 +828,9 @@ export const generateKeywords = async (
       };
       
       throw new Error(
-        `AI response has invalid keyword counts for Google Rank #1 optimization. ` +
-        `Expected: Primary (3-5), Secondary (8-12), Long-tail (10-15). ` +
-        `Received: Primary (${counts.primary}), Secondary (${counts.secondary}), Long-tail (${counts.longtail}). ` +
+        `AI response has invalid keyword counts for modern SEO optimization. ` +
+        `Expected: Target Focus (2-5), Supporting Topics (5-12), User Query Variations (8-20). ` +
+        `Received: Target Focus (${counts.primary}), Supporting Topics (${counts.secondary}), User Queries (${counts.longtail}). ` +
         `Please try again or use Deep Analysis mode for better results.`
       );
     }

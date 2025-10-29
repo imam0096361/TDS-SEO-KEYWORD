@@ -483,49 +483,49 @@ const App: React.FC = () => {
                 </div>
                 
                 <KeywordCard 
-                  title="Primary Keywords (3-5)" 
+                  title="Target Focus Keywords (2-5)" 
                   keywords={result.primary} 
                   color="text-blue-400" 
-                  tooltipText="1-3 word phrases representing the article's core topics. High search volume, broad intent. Includes headline topic and main themes."
+                  tooltipText="Core topics and primary search intent (any length). What is this article actually about? Captures complete user intent without arbitrary word limits. Each represents a distinct way users would search for this topic."
                 />
                 <KeywordCard 
-                  title="Secondary Keywords (8-12)" 
+                  title="Supporting Topic Keywords (5-12)" 
                   keywords={result.secondary} 
                   color="text-green-400" 
-                  tooltipText="2-5 word phrases covering all major entities, people, places, organizations, and concepts. Medium search volume, specific intent."
+                  tooltipText="Themes and sub-topics covered (any length). Demonstrates topical breadth and expertise. Focus on concepts, trends, and market dynamics - not just entity lists. Shows semantic coverage and subject matter depth."
                 />
                 <KeywordCard 
-                  title="Long-tail Keywords (10-15)" 
+                  title="User Query Variations (8-20)" 
                   keywords={result.longtail} 
                   color="text-yellow-400" 
-                  tooltipText="4+ word phrases mirroring actual user search queries. Low search volume, high conversion intent. Verbatim from article."
+                  tooltipText="How real people search this topic (any length). Verbatim phrases from article matching natural language queries. Includes statistics with context, complete thoughts, and conversational patterns. Featured Snippet opportunities."
                 />
 
                 {/* Advanced SEO Features */}
                 {result.lsiKeywords && result.lsiKeywords.length > 0 && (
                   <KeywordCard 
-                    title="LSI Keywords (Semantic SEO)" 
+                    title="Semantic Context Keywords (5-8)" 
                     keywords={result.lsiKeywords} 
                     color="text-cyan-400" 
-                    tooltipText="Latent Semantic Indexing keywords. Terms Google expects to see with your main keywords. Proves topical authority to BERT/MUM algorithms."
+                    tooltipText="Related concepts and terms Google expects to see (any length). Synonyms, industry terminology, and co-occurring phrases. Proves comprehensive topic coverage to BERT/MUM algorithms. Signals content quality and expertise."
                   />
                 )}
 
                 {result.questionKeywords && result.questionKeywords.length > 0 && (
                   <KeywordCard 
-                    title="Question Keywords (PAA Optimization)" 
+                    title="Question-Intent Keywords (5-10)" 
                     keywords={result.questionKeywords} 
                     color="text-pink-400" 
-                    tooltipText="Question-based keywords targeting Google's People Also Ask (PAA) boxes and voice search. Each question is a Featured Snippet opportunity."
+                    tooltipText="Complete, natural questions users ask (any length). Targets People Also Ask (PAA) boxes, Featured Snippets, and voice search. Each question is a position-zero opportunity. Optimized for conversational AI and Google Assistant."
                   />
                 )}
 
                 {result.entities && result.entities.length > 0 && (
                   <KeywordCard 
-                    title="Named Entities (Knowledge Graph)" 
+                    title="Named Entities (All)" 
                     keywords={result.entities} 
                     color="text-orange-400" 
-                    tooltipText="Named entities extracted from your article. Connects to Google Knowledge Graph for E-E-A-T signals and entity-based SEO."
+                    tooltipText="All named entities extracted: People, Organizations, Places, Events, Policies. Connects to Google Knowledge Graph for E-E-A-T signals. Entity-based ranking is how modern Google works. Comprehensive extraction = authority signals."
                   />
                 )}
 
