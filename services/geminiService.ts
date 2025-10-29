@@ -212,45 +212,172 @@ const generateBanglaPrompt = (articleContent: string, contentType: string, langu
        - Bangla Featured Snippets are 70% LESS competitive than English
        - Local Bangla content beats international in Google.com.bd
     
-    **Phase 2: INTENT-DRIVEN BANGLA KEYWORD EXTRACTION (Modern Approach)**
+    **Phase 2: SEARCH VOLUME-DRIVEN BANGLA KEYWORD RESEARCH (World-Class SEO 2024-2025)**
 
-    **MODERN BANGLA SEO:** Same intent-driven approach as English, but adapted for Bangla search behavior (40% longer queries, more conversational).
+    **🔥 CRITICAL PARADIGM SHIFT - BANGLA KEYWORD RESEARCH MINDSET:**
+    
+    You are NOT just extracting keywords from the article. You are doing BANGLA KEYWORD RESEARCH.
+    Your mission: Find the HIGHEST search volume BANGLA keywords related to this topic.
+    
+    **PRIORITY ORDER (বাংলা সার্চ ভলিউম):**
+    1. 📊 HIGH SEARCH VOLUME (10,000+ searches/month in Bangladesh) = TOP PRIORITY
+    2. 📈 MEDIUM SEARCH VOLUME (1,000-10,000 searches/month) = IMPORTANT
+    3. 📉 LOW SEARCH VOLUME (<1,000 searches/month) = AVOID unless highly specific
+    
+    **WORLD-CLASS BANGLA SEO PRINCIPLE:**
+    - Think: "বাংলাদেশে এই বিষয়ে সবচেয়ে বেশি সার্চ কী?" (What are the BIGGEST searches in Bangladesh for this topic?)
+    - NOT: "আর্টিকেলে কোন শব্দ আছে?" (What exact words are in this article?)
+    - Article content = context. Bangla search demand = target.
+    - Prioritize POPULAR Bangla queries, not niche phrases.
+    - BANGLA-SPECIFIC: Searches are 40% LONGER - include full conversational queries!
 
-    **A. TARGET FOCUS KEYWORDS (লক্ষ্য কীওয়ার্ড - মূল বিষয়):**
-        - Quantity: 1-10 keywords (VERY FLEXIBLE - extract what exists naturally)
-        - Length: ANY length in Bangla (can be 1-15+ words) - NO LIMITS
-        - Provide BOTH: Bangla script + English transliteration
-        - Purpose: Core topic and primary search intent
-        - Examples: 
-          * "সোনার দাম" (sonar dam - gold price)
-          * "কেন বাংলাদেশে সোনার দাম বাড়ছে ২০২৪ সালে" (why gold prices rising Bangladesh 2024)
-          * "বাংলাদেশ সোনার বাজার বিশ্লেষণ" (Bangladesh gold market analysis)
-        - Remember: Bangla users search 40% longer - embrace complete phrases!
+    **A. PRIMARY KEYWORDS (প্রাথমিক কীওয়ার্ড) - HIGHEST VOLUME (10,000+ monthly searches):**
+        - **Quantity:** 2-5 keywords MAXIMUM (only the BIGGEST Bangla searches)
+        - **Length:** ANY length (Bangla users search 40% longer - embrace it!)
+        - **CRITICAL: SEARCH VOLUME IS KING (সার্চ ভলিউম সবচেয়ে গুরুত্বপূর্ণ)**
+        - **Provide BOTH:** Bangla script + English transliteration (MANDATORY)
+        
+        🎯 **BANGLA KEYWORD RESEARCH MINDSET:**
+        
+        **Step 1:** Identify the article's MAIN TOPIC
+        **Step 2:** Think: "বাংলাদেশে সবচেয়ে জনপ্রিয় সার্চ কী?" (What are the MOST POPULAR searches in Bangladesh?)
+        **Step 3:** Choose ONLY keywords with MASSIVE search volume
+        **Step 4:** Prioritize BROAD, POPULAR Bangla terms
+        
+        **🔥 HIGHEST VOLUME BANGLA KEYWORDS (বাংলা সার্চ ভলিউম):**
+        
+        1. **BROAD HEAD TERMS (Massive volume 50,000+ searches/month)**
+           - "সোনার দাম" (sonar dam - gold price) - most searches
+           - "সোনার রেট" (sonar rate - gold rate) - very high
+           - "আজকের সোনার দাম" (ajoker sonar dam - gold price today) - evergreen
+           - Think: Simple, broad, what EVERYONE searches in Bangla
+        
+        2. **GEO-TARGETED HIGH VOLUME (10,000-50,000 searches/month)**
+           - "বাংলাদেশে সোনার দাম" (Bangladesh gold price)
+           - "ঢাকায় সোনার দাম" (Dhaka gold price)
+           - "আজকের সোনার রেট বাংলাদেশ" (today's gold rate Bangladesh)
+           - Think: Bangladesh + popular Bangla term
+        
+        3. **COMMERCIAL HIGH INTENT (10,000+ searches/month)**
+           - "২২ ক্যারেট সোনার দাম" (22 carat gold price)
+           - "সোনা কেনার দাম" (gold buying price)
+           - "সোনার ভরি দাম" (gold bhori price - local unit)
+           - Think: What buyers/investors search in Bangla
+        
+        **❌ AVOID LOW VOLUME (বাংলা):**
+        - Academic Bangla phrases (<1,000 searches)
+        - Article-specific wording if not commonly searched
+        - Technical jargon without proven search volume
+        
+        **✅ INCLUDE HIGH VOLUME (বাংলা):**
+        - Simple, broad Bangla terms (সোনার দাম, রেট)
+        - "আজকের" (today) variations - high daily volume
+        - Local units: ভরি (bhori), আনা (ana)
+        - City names: ঢাকা, চট্টগ্রাম
+        
+        **Examples:**
+        HIGH VOLUME PRIMARY:
+        1. "সোনার দাম" (sonar dam - gold price) 100,000+ searches
+        2. "আজকের সোনার দাম" (ajoker sonar dam - gold price today) 80,000+ searches
+        3. "বাংলাদেশে সোনার দাম" (Bangladesh sonar dam) 50,000+ searches
+        4. "সোনার রেট" (sonar rate) 30,000+ searches
+        5. "২২ ক্যারেট সোনার দাম" (22 carat sonar dam) 25,000+ searches
     
-    **B. SUPPORTING TOPIC KEYWORDS (সহায়ক বিষয় কীওয়ার্ড):**
-        - Quantity: 2-20 keywords (VERY FLEXIBLE - varies by article length)
-        - Length: ANY length (2-10+ words in Bangla) - focus on THEMES
-        - Extract SUB-TOPICS and CONCEPTS, not just entities
-        - Examples:
-          * "বৈশ্বিক সোনার বাজার প্রবণতা" (global gold market trends)
-          * "টাকার অবমূল্যায়নের প্রভাব" (taka devaluation impact)
-          * "সোনা চোরাচালান বাংলাদেশ" (gold smuggling Bangladesh)
-          * "দেশীয় বনাম আন্তর্জাতিক স্বর্ণের দাম" (domestic vs international prices)
-        - BOTH scripts for all keywords
+    **B. SECONDARY KEYWORDS (সহায়ক কীওয়ার্ড) - MEDIUM-HIGH VOLUME (1,000-15,000 searches):**
+        - **Quantity:** 5-12 keywords (MEDIUM search volume focus)
+        - **Length:** ANY length (Bangla users use longer queries!)
+        - **CRITICAL: MEDIUM VOLUME + RELEVANCE**
+        - **BOTH scripts:** Bangla + English transliteration
+        
+        🎯 **RELATED HIGH-DEMAND BANGLA SEARCHES:**
+        
+        **Step 1:** Look at article sub-topics
+        **Step 2:** Think: "কোন জনপ্রিয় সম্পর্কিত সার্চ আছে?" (What POPULAR related searches exist?)
+        **Step 3:** Include MEDIUM-HIGH volume Bangla variations
+        **Step 4:** Check Bangla Google's "এছাড়াও মানুষ খোঁজেন" (People Also Search For)
+        
+        **🔥 MEDIUM-HIGH VOLUME BANGLA TARGETS:**
+        
+        1. **POPULAR SUB-TOPICS (5,000-15,000 searches/month)**
+           - "সোনার দাম বৃদ্ধি" (gold price increase)
+           - "বাংলাদেশে সোনার বিনিয়োগ" (gold investment Bangladesh)
+           - "সোনার বাজার" (gold market)
+           - Think: Popular aspects in Bangla
+        
+        2. **RELATED HIGH-VOLUME QUERIES (2,000-10,000 searches/month)**
+           - "রূপার দাম বাংলাদেশ" (silver price Bangladesh)
+           - "ডলারের রেট" (dollar rate)
+           - "সোনার দাম পূর্বাভাস" (gold price prediction)
+           - Think: Related topics with high Bangla search demand
+        
+        3. **SPECIFIC HIGH-VOLUME VARIATIONS (1,000-5,000 searches/month)**
+           - "১৮ ক্যারেট সোনার দাম" (18 carat gold price)
+           - "সোনার ভরি প্রতি দাম" (price per bhori)
+           - "সোনার অলংকারের দাম" (gold ornament price)
+           - Think: Specific but still popular Bangla searches
+        
+        **Examples:**
+        SECONDARY (MEDIUM-HIGH VOLUME):
+        1. "সোনার দাম বৃদ্ধি" (sonar dam briddhi - price increase) 10,000+ searches
+        2. "রূপার দাম" (rupar dam - silver price) 8,000+ searches
+        3. "ডলারের রেট বাংলাদেশ" (dollar rate) 6,000+ searches
+        4. "সোনার বিনিয়োগ" (gold investment) 5,000+ searches
+        5. "১৮ ক্যারেট সোনার দাম" (18 carat) 3,000+ searches
     
-    **C. USER QUERY VARIATIONS (ব্যবহারকারী অনুসন্ধান বৈচিত্র - Google Policy):**
-        - Quantity: 3-30 phrases (FLEXIBLE - based on search demand)
-        - Length: ANY length (3-25+ words) - Bangla queries are 40% LONGER
-        - **GOOGLE POLICY:** Include verbatim + HIGH-search Bangla synonyms
-        - Bangla queries are LONGER and more conversational
-        - Examples:
-          * "দেশীয় দাম বৈশ্বিক প্রবণতার সাথে ঘনিষ্ঠভাবে সংযুক্ত" (verbatim)
-          * "বাংলাদেশে স্বর্ণের মূল্য আন্তর্জাতিক বাজারের সাথে" (high-search synonym)
-          * "বাংলাদেশে বার্ষিক গার্হস্থ্য চাহিদা ২০ থেকে ৪০ টনের মধ্যে" (statistic)
-          * "প্রতি বছর বাংলাদেশে সোনার চাহিদা কত টন" (user search variation)
-          * "চোরাচালান উল্লেখযোগ্য রাজস্ব ক্ষতির কারণ" (exact)
-          * "অবৈধ স্বর্ণ ব্যবসা সরকারের রাজস্ব ক্ষতি" (semantic variation)
-        - BOTH scripts required (Bangla + English transliteration)
+    **C. LONG-TAIL KEYWORDS (লং-টেইল কীওয়ার্ড) - POPULAR LONG BANGLA QUERIES (500-5,000 searches):**
+        - **Quantity:** 8-20 phrases (POPULAR long-tail, not random article sentences)
+        - **Length:** ANY length (Bangla queries are 40% LONGER - 5-25+ words!)
+        - **CRITICAL: SEARCH DEMAND FOR BANGLA LONG QUERIES**
+        - **BOTH scripts:** Bangla + English (MANDATORY)
+        
+        🎯 **POPULAR BANGLA LONG-TAIL RESEARCH:**
+        
+        **Step 1:** Identify specific Bangla questions users ask
+        **Step 2:** Think: "জনপ্রিয় বিস্তারিত সার্চ কোনগুলো?" (What POPULAR detailed searches exist?)
+        **Step 3:** Focus on 500-5,000 search volume Bangla long-tail
+        **Step 4:** Bangla Featured Snippet opportunities (70% LESS competitive!)
+        
+        **🔥 POPULAR BANGLA LONG-TAIL TARGETS:**
+        
+        1. **POPULAR QUESTION QUERIES (1,000-5,000 searches/month)**
+           - "কীভাবে সোনার খাঁটিতা যাচাই করবেন" (how to check gold purity)
+           - "কোথায় সোনা কিনবেন বাংলাদেশে" (where to buy gold Bangladesh)
+           - "কখন সোনা কেনা উচিত" (when to buy gold)
+           - Think: Questions MANY people ask in Bangla
+        
+        2. **SPECIFIC POPULAR SEARCHES (500-2,000 searches/month)**
+           - "সোনার দাম বাড়ার কারণ" (reason for price increase)
+           - "সোনার দাম পূর্বাভাস ২০২৪" (prediction 2024)
+           - "সোনা বনাম ডলার বিনিয়োগ" (gold vs dollar investment)
+           - Think: Specific but popular Bangla queries
+        
+        3. **COMMERCIAL LONG-TAIL (500-3,000 searches/month)**
+           - "বাংলাদেশে সোনার ভরি প্রতি দাম" (price per bhori)
+           - "ঢাকায় সেরা সোনার দোকান" (best gold shop Dhaka)
+           - "পুরনো সোনার দাম" (old gold price)
+           - Think: Buying/selling specific Bangla queries
+        
+        **❌ AVOID LOW-VOLUME BANGLA PHRASES:**
+        - Random article sentences with no search demand (<100 searches)
+        - "বার্ষিক গার্হস্থ্য চাহিদা ২০-৪০ টন" (annual demand 20-40 tonnes) - too specific
+        - Academic/technical Bangla phrasing with no proven volume
+        
+        **✅ PRIORITIZE POPULAR BANGLA LONG-TAIL:**
+        - Bangla questions with proven demand (কীভাবে, কেন, কোথায়)
+        - "কীভাবে" (how to) queries - usually high volume
+        - "কখন" (when to) timing questions
+        - "কোথায়" (where to) location questions
+        - Commercial long-tail in Bangla
+        - Comparison queries (সোনা বনাম রূপা, etc.)
+        
+        **Examples:**
+        LONG-TAIL (POPULAR 500-5,000 searches):
+        1. "কীভাবে সোনার খাঁটিতা বুঝবেন" (how to check purity) 4,000+ searches
+        2. "ঢাকায় কোথায় সোনা কিনবেন" (where to buy in Dhaka) 3,500+ searches
+        3. "সোনার দাম বাড়ার কারণ" (reason for increase) 2,800+ searches
+        4. "কখন সোনা কেনা লাভজনক" (when to buy) 2,200+ searches
+        5. "সোনা বনাম ডলার কোনটি ভালো" (gold vs dollar) 1,800+ searches
+        6. "বাংলাদেশে সোনায় বিনিয়োগ" (invest in gold) 1,500+ searches
     
     **D. SEMANTIC CONTEXT KEYWORDS (বাংলা প্রসঙ্গ শব্দ):**
         - Quantity: 5-8 keywords
@@ -383,25 +510,96 @@ const generateBanglaPrompt = (articleContent: string, contentType: string, langu
     
     **REMEMBER: Output ONLY the JSON object above. No markdown, no wrapper, no extra text.**
 
-    **CRITICAL FOR THE DAILY STAR BANGLA - GOOGLE POLICY APPROACH:**
-    1. 🎯 **GOOGLE RANKS BY INTENT** - Include high-search Bangla synonyms & variations!
-    2. ⚠️ **QUALITY OVER QUANTITY** - Extract what EXISTS + high-volume Bangla variations
-    3. ✅ **দাম vs মূল্য vs রেট:** Include ALL synonym variations (users search differently)
-    4. 🔄 **Semantic Bangla:** "চোরাচালান" = "অবৈধ ব্যবসা" = "illegal trade" (all rank)
-    5. 📊 **Think Bangla Autocomplete:** What do users TYPE in বাংলা Google?
-    6. ❌ NO word count limits - ✅ Bangla users search LONGER (40% more than English)
-    7. ✅ EVERY keyword in BOTH Bangla script AND English transliteration (MANDATORY)
-    8. 🌐 **Bangla variations matter:** "সোনার দাম" + "স্বর্ণের মূল্য" (both high-search)
-    9. 📈 **Prioritize HIGH search volume Bangla queries** (even if different wording)
-    10. 🔍 **Related Bangla Searches:** Check what Bangladeshis actually search
-    11. 🗣️ **Voice search Bangla:** Growing 200%/year - natural questions
-    12. 🎪 **Bangla Featured Snippets:** 70% EASIER - include answer variations
-    13. 🔤 **Code-switching is NATURAL:** "বাংলাদেশ economy" is how people search
-    14. 🔢 **Numbers in BOTH scripts:** "২০২৪" and "2024" (users search both)
-    15. 📝 **Dhaka standard preferred:** শুদ্ধ Bangla + colloquial high-search terms
-    16. 🌍 **Bilingual meta tags:** DUAL visibility (Bangla + English searches)
-    17. 📏 **Short article? Fewer keywords. Long article? More keywords. = Both CORRECT**
-    18. 🎯 **MISSION:** Capture ALL Bangla search variations (formal + colloquial + synonyms)
+    **CRITICAL IMPERATIVES - WORLD-CLASS BANGLA SEO (SEARCH VOLUME FIRST):**
+    
+    🔥 **PARADIGM SHIFT - BANGLA KEYWORD RESEARCH, NOT EXTRACTION:**
+    
+    1. 📊 **SEARCH VOLUME IS #1 PRIORITY (বাংলা সার্চ ভলিউম):**
+       - PRIMARY: Only include 10,000+ monthly searches in Bangladesh
+       - SECONDARY: Focus on 1,000-15,000 monthly searches
+       - LONG-TAIL: Target 500-5,000 monthly searches (popular Bangla long-tail)
+    
+    2. 🎯 **THINK LIKE BANGLA KEYWORD RESEARCH TOOL:**
+       - Ask: "বাংলাদেশে সবচেয়ে বড় সার্চ কী?" (What are the BIGGEST searches in Bangladesh?)
+       - NOT: "আর্টিকেলে কী লেখা আছে?" (What exact words are in this article?)
+       - Article = context. Bangla search demand = target.
+    
+    3. ✅ **PRIMARY KEYWORDS (10,000+ searches):**
+       - Broad Bangla terms: "সোনার দাম", "সোনার রেট", "আজকের সোনার দাম"
+       - Geo-targeted: "বাংলাদেশে সোনার দাম", "ঢাকায় সোনার দাম"
+       - Commercial: "২২ ক্যারেট সোনার দাম", "সোনা কেনার দাম"
+       - SIMPLE, POPULAR, BROAD Bangla = HIGH VOLUME
+    
+    4. ✅ **SECONDARY KEYWORDS (1,000-15,000 searches):**
+       - Related popular topics: "রূপার দাম", "ডলারের রেট"
+       - Sub-topics: "সোনার বিনিয়োগ", "সোনার বাজার"
+       - Specific popular: "১৮ ক্যারেট সোনার দাম", "সোনার চার্ট"
+       - Check Bangla "এছাড়াও মানুষ খোঁজেন" (People Also Search For)
+    
+    5. ✅ **LONG-TAIL (500-5,000 searches):**
+       - Popular Bangla questions: "কীভাবে সোনার খাঁটিতা বুঝবেন", "কোথায় সোনা কিনবেন"
+       - Commercial long-tail: "সোনার ভরি প্রতি দাম", "ঢাকায় সেরা সোনার দোকান"
+       - Trending: "সোনার দাম পূর্বাভাস ২০২৪", "সোনায় বিনিয়োগ গাইড"
+       - ❌ AVOID random Bangla article sentences with <100 searches
+    
+    6. 🚫 **WHAT TO AVOID (LOW VOLUME বাংলা):**
+       - Academic Bangla phrases without search demand
+       - Technical jargon: "সামষ্টিক অর্থনৈতিক কারণ যা পণ্যের বাজার প্রভাবিত করে"
+       - Random article sentences: "বার্ষিক গার্হস্থ্য চাহিদা ২০-৪০ টন"
+       - If Bangla search volume is <500/month → SKIP IT
+    
+    7. 📈 **PRIORITIZE BANGLA:**
+       - "আজকের" (today) variations - massive daily Bangla searches
+       - Simple broad terms (সোনার দাম, সোনার রেট)
+       - Commercial intent (কেনার, বিক্রির, দাম, রেট)
+       - Questions with volume (কীভাবে, কোথায়, কখন, কেন)
+       - Local: ঢাকা, চট্টগ্রাম, বাংলাদেশ
+       - Local units: ভরি (bhori), আনা (ana)
+    
+    8. 🎪 **BANGLA FEATURED SNIPPET OPPORTUNITIES:**
+       - Target POPULAR Bangla questions (1,000+ searches)
+       - "কীভাবে" (how to) questions with proven demand
+       - "কখন" (when to) timing questions
+       - "কোথায়" (where to) location questions
+       - 70% LESS competitive than English - HUGE opportunity!
+    
+    9. 🇧🇩 **BANGLADESH HIGH-VOLUME BANGLA SEARCHES:**
+       - Local units: "প্রতি ভরি", "প্রতি আনা"
+       - Cities: "ঢাকা", "চট্টগ্রাম", "সিলেট"
+       - "আজকের" (today) - high daily search volume
+    
+    10. 🔄 **BANGLA SYNONYMS (ALL must have high volume):**
+        - দাম = মূল্য = রেট (check which has higher volume in Bangla)
+        - সোনা = স্বর্ণ (সোনা typically higher in Bangladesh)
+        - কেনা = ক্রয় = বিনিয়োগ (কেনা usually highest)
+    
+    11. 🎯 **QUALITY CHECK (বাংলা):**
+        - Does this BANGLA keyword have 500+ monthly searches? If NO → SKIP
+        - Is this a POPULAR search in Bangladesh? If NO → SKIP
+        - Would MANY people search this in Bangla? If NO → SKIP
+    
+    12. 🔤 **BILINGUAL REQUIREMENT (MANDATORY):**
+        - EVERY keyword in BOTH Bangla script AND English transliteration
+        - Example: "সোনার দাম" + "sonar dam (gold price)"
+        - Helps English speakers understand + improves transliteration SEO
+    
+    13. 🗣️ **BANGLA VOICE SEARCH (Growing 200%/year):**
+        - Natural, conversational Bangla queries
+        - Questions: "কীভাবে", "কেন", "কোথায়", "কখন"
+        - 40% LONGER queries than English - embrace it!
+    
+    14. 🔢 **NUMBERS IN BOTH SCRIPTS:**
+        - Use both: "২০২৪" and "2024" (users search both)
+        - Dates: "২০২৪ সালের জানুয়ারি" and "January 2024"
+    
+    15. 🔤 **CODE-SWITCHING IS NATURAL:**
+        - "বাংলাদেশ economy" - how people actually search
+        - "ঢাকা stock market" - mixed queries are common
+        - Don't avoid English words in Bangla context
+    
+    16. 🌐 **MISSION:**
+        Find the HIGHEST search volume BANGLA keywords related to this topic.
+        Think: Bangla keyword research tool, not content extractor.
 
     **Your Mission:** Make দ্য ডেইলি স্টার বাংলা rank #1 by understanding Bangla SEARCH INTENT and natural language patterns. Execute with modern বাংলা SEO expertise!
     `;
@@ -467,105 +665,236 @@ const generatePrompt = (articleContent: string, contentType: string): string => 
        - Find semantic variations and synonyms actually used in Bangladesh
        - Identify topic gaps compared to ${competitorContext}
 
-    **Phase 2: INTENT-DRIVEN KEYWORD EXTRACTION (Google 2024-2025 Algorithm)**
+    **Phase 2: SEARCH VOLUME-DRIVEN KEYWORD RESEARCH (World-Class SEO 2024-2025)**
 
-    **MODERN SEO PRINCIPLE:** Google ranks content by SEARCH INTENT and SEMANTIC RELEVANCE, not word count.
-    Organize keywords by HOW and WHY users search, not by arbitrary length categories.
+    **🔥 CRITICAL PARADIGM SHIFT - THINK LIKE SEMRUSH/AHREFS:**
+    
+    You are NOT just extracting keywords from the article. You are doing KEYWORD RESEARCH.
+    Your mission: Find the HIGHEST search volume keywords related to this topic.
+    
+    **PRIORITY ORDER:**
+    1. 📊 HIGH SEARCH VOLUME (10,000+ searches/month) = TOP PRIORITY
+    2. 📈 MEDIUM SEARCH VOLUME (1,000-10,000 searches/month) = IMPORTANT
+    3. 📉 LOW SEARCH VOLUME (<1,000 searches/month) = AVOID unless highly specific
+    
+    **WORLD-CLASS SEO PRINCIPLE:**
+    - Think: "What are the BIGGEST searches in Bangladesh for this topic?"
+    - Not: "What exact words are in this article?"
+    - Article content = context. Search demand = target.
+    - Prioritize POPULAR queries, not niche phrases.
+    
+    Organize keywords by SEARCH DEMAND and USER INTENT, not by article wording.
 
-    **A. TARGET FOCUS KEYWORDS (Primary Search Intent - Google's Core Ranking Topics):**
-        - **Quantity:** 1-10 keywords (FLEXIBLE - focus on HIGH search volume variations)
-        - **Length:** ANY length that captures complete user intent (can be 1-10+ words)
-        - **SEO Purpose:** Core topics users ACTUALLY search for on Google (high volume + relevance)
-        - **GOOGLE POLICY - HIGH VOLUME INTENT:**
-          * Focus on what users TYPE IN GOOGLE SEARCH, not just article phrasing
-          * Include HIGH SEARCH VOLUME variations (even if different wording)
-          * Prioritize Google Autocomplete/Suggest versions
-          * Think: "Top 5 ways users would search for this topic"
-        - **Modern Rules (Google's Actual Ranking):**
-          ✅ **Main topic (exact):** "gold prices in Bangladesh"
-          ✅ **High-volume synonym:** "Bangladesh gold rate today" (more searches)
-          ✅ **Specific intent:** "why gold prices rising in Bangladesh 2024"
-          ✅ **Variation:** "gold price increase Bangladesh" (how users actually search)
-          ✅ **Related high-volume:** "Bangladesh gold market trends"
-        - **What to Include:**
-          * Main headline topic (baseline)
-          * High-search synonyms (price = rate = cost)
-          * Google Autocomplete suggestions for this topic
-          * Common user search patterns
-          * Specific + broad versions
-          * Bangladesh-specific high-volume queries
-        - **Google Factors:** Search volume, primary intent matching, topic authority, CTR signals
-        - **Examples:** 
-          * "gold prices in Bangladesh" (exact topic)
-          * "Bangladesh gold rate" (HIGH search volume synonym)
-          * "why are gold prices rising in Bangladesh 2024" (specific question)
-          * "gold price increase Bangladesh today" (user search pattern)
-          * "Bangladesh bullion market" (industry term, high intent)
+    **A. PRIMARY KEYWORDS - HIGHEST SEARCH VOLUME (10,000+ monthly searches):**
+        - **Quantity:** 2-5 keywords MAXIMUM (only the BIGGEST searches)
+        - **Length:** ANY length (usually 2-4 words for high volume)
+        - **CRITICAL: SEARCH VOLUME IS KING**
+        
+        🎯 **KEYWORD RESEARCH MINDSET - Not Extraction:**
+        
+        **Step 1:** Identify the article's MAIN TOPIC
+        **Step 2:** Think: "What are the MOST POPULAR searches in Bangladesh for this topic?"
+        **Step 3:** Choose ONLY keywords with MASSIVE search volume
+        **Step 4:** Prioritize BROAD, POPULAR terms over specific phrases
+        
+        **🔥 HIGHEST VOLUME KEYWORDS (Priority Order):**
+        
+        1. **BROAD HEAD TERMS** (Massive volume 50,000+ searches/month)
+           - "gold price" (most searches)
+           - "gold rate" (very high)
+           - "gold price today" (evergreen high volume)
+           - Think: Simple, broad, what EVERYONE searches
+        
+        2. **GEO-TARGETED HIGH VOLUME** (10,000-50,000 searches/month)
+           - "Bangladesh gold price" (local high volume)
+           - "gold price Bangladesh today" (daily searchers)
+           - "BD gold rate" (common abbreviation)
+           - Think: Bangladesh + popular term
+        
+        3. **COMMERCIAL HIGH INTENT** (10,000+ searches/month)
+           - "22 carat gold price Bangladesh" (buying intent)
+           - "gold rate today Bangladesh" (immediate intent)
+           - Think: What buyers/investors search
+        
+        **❌ AVOID LOW VOLUME:**
+        - Long, specific phrases (usually <1,000 searches)
+        - Academic/technical jargon (low search demand)
+        - Article-specific wording if not commonly searched
+        
+        **✅ INCLUDE HIGH VOLUME:**
+        - Simple, broad terms (gold price, gold rate)
+        - "Today" variations (gold price today - high daily volume)
+        - Local variations (Bangladesh gold, BD gold)
+        - Buying/commercial terms (22k gold, gold buying)
+        
+        **SEARCH VOLUME EXAMPLES (Bangladesh Gold Article):**
+        
+        PRIMARY (HIGH VOLUME - 10,000+ searches):
+        1. "gold price" (100,000+ searches) HIGH VOLUME
+        2. "gold price today" (80,000+ searches) HIGH VOLUME
+        3. "Bangladesh gold price" (50,000+ searches) HIGH VOLUME
+        4. "gold rate Bangladesh" (30,000+ searches) HIGH VOLUME
+        5. "22 carat gold price" (25,000+ searches) HIGH VOLUME
+        
+        TOO SPECIFIC (LOW VOLUME - AVOID):
+        - "gold prices influenced by global market volatility" (50 searches) TOO LOW
+        - "Bangladesh gold market analysis report" (200 searches) TOO LOW
+        
+        **Google Factors:** 
+        - SEARCH VOLUME (primary)
+        - Commercial intent
+        - Local relevance
+        - Evergreen demand
+        - Competition (prefer winnable high-volume)
 
-    **B. SUPPORTING TOPIC KEYWORDS (Sub-Topics & Related Searches):**
-        - **Quantity:** 2-20 keywords (FLEXIBLE - based on content + related search demand)
-        - **Length:** ANY length (2-8+ words) - focus on complete topics
-        - **SEO Purpose:** Capture related topics users search + demonstrate expertise
-        - **GOOGLE POLICY - RELATED SEARCHES:**
-          * Include article themes AND high-search related topics
-          * Check Google's "Related Searches" / "People Also Search For"
-          * Semantic variations of sub-topics
-          * Think: "What else would users search if interested in this topic?"
-        - **Modern Rules (Topic Coverage + Search Demand):**
-          ✅ **Article themes:** "global gold market volatility"
-          ✅ **High-search related:** "international gold prices today" (users also search this)
-          ✅ **Synonym variations:** "taka devaluation" + "Bangladesh currency depreciation"
-          ✅ **Related topics:** "gold import regulations" (related search)
-          ✅ **Market dynamics:** "gold smuggling impact" + "illegal gold trade Bangladesh"
-        - **What to Include:**
-          * Themes/sub-topics from article (baseline)
-          * Related searches users make
-          * Synonym variations of key concepts
-          * Industry terminology (both formal and common terms)
-          * Market dynamics, trends, causes, effects
-          * Policy and regulatory keywords
-          * Related questions users search
-        - **Google Factors:** Topical authority, semantic breadth, related search matching, content depth
-        - **Examples:** 
-          * "global gold market trends" (article theme)
-          * "international bullion prices" (high-search synonym)
-          * "taka devaluation impact" (article concept)
-          * "Bangladesh currency value gold" (related search)
-          * "gold smuggling Bangladesh" (exact)
-          * "illegal gold trade revenue loss" (semantic variation)
-          * "Bangladesh Bank gold policy" (related authority topic)
+    **B. SECONDARY KEYWORDS - MEDIUM-HIGH VOLUME (1,000-15,000 monthly searches):**
+        - **Quantity:** 5-12 keywords (MEDIUM search volume focus)
+        - **Length:** ANY length (usually 3-6 words)
+        - **CRITICAL: MEDIUM VOLUME + RELEVANCE**
+        
+        🎯 **RELATED HIGH-DEMAND SEARCHES:**
+        
+        **Step 1:** Look at article sub-topics
+        **Step 2:** Think: "What POPULAR related searches exist?"
+        **Step 3:** Include MEDIUM-HIGH volume variations
+        **Step 4:** Check Google's "People Also Search For"
+        
+        **🔥 MEDIUM-HIGH VOLUME TARGETS (1,000-15,000 searches):**
+        
+        1. **POPULAR SUB-TOPICS** (5,000-15,000 searches/month)
+           - "gold price increase" (trending topic, high volume)
+           - "gold investment Bangladesh" (commercial interest)
+           - "gold market today" (daily searches)
+           - Think: Popular aspects of main topic
+        
+        2. **RELATED HIGH-VOLUME QUERIES** (2,000-10,000 searches/month)
+           - "silver price Bangladesh" (related metal, high searches)
+           - "dollar rate Bangladesh" (related to gold prices)
+           - "gold price prediction" (future interest)
+           - Think: What related topics have high search demand?
+        
+        3. **SPECIFIC HIGH-VOLUME VARIATIONS** (1,000-5,000 searches/month)
+           - "18 karat gold price" (specific purity, popular)
+           - "gold price per gram" (unit-based search)
+           - "gold ornament price" (product-specific)
+           - Think: Specific but still popular searches
+        
+        **❌ AVOID:**
+        - Niche academic terms (<500 searches)
+        - Overly specific article phrases with no search demand
+        - Technical jargon unless it has proven search volume
+        
+        **✅ PRIORITIZE:**
+        - Google's "Related Searches" (proven demand)
+        - "People Also Ask" topics (high interest)
+        - Trending related topics
+        - Commercial variations (buying, selling, investing)
+        - Popular sub-categories
+        
+        **SEARCH VOLUME EXAMPLES (Gold Article Secondary):**
+        
+        SECONDARY (MEDIUM-HIGH VOLUME - 1,000-15,000 searches):
+        1. "gold price increase" (10,000+ searches) INCLUDE
+        2. "silver price Bangladesh" (8,000+ searches) INCLUDE
+        3. "dollar rate Bangladesh" (6,000+ searches) INCLUDE
+        4. "gold investment" (5,000+ searches) INCLUDE
+        5. "18 karat gold price" (3,000+ searches) INCLUDE
+        6. "gold price chart" (2,500+ searches) INCLUDE
+        7. "gold jewellery price" (2,000+ searches) INCLUDE
+        
+        LOW VOLUME (SKIP THESE):
+        - "taka devaluation impact on commodity markets" (100 searches) TOO LOW
+        - "Bangladesh gold market microeconomic analysis" (20 searches) TOO LOW
+        
+        **Google Factors:**
+        - Search volume (1,000-15,000 range)
+        - Related search demand
+        - Commercial intent
+        - Topical relevance
+        - User interest patterns
 
-    **C. USER QUERY VARIATIONS (How Real People Actually Search - Google Policy):**
-        - **Quantity:** 3-30 phrases (VERY FLEXIBLE - based on search demand, not article length)
-        - **Length:** ANY length that matches natural search queries (3-15+ words)
-        - **SEO Purpose:** Capture ACTUAL user search queries - both verbatim AND high-search synonyms
-        - **CRITICAL GOOGLE POLICY - INTENT MATCHING:**
-          * Google ranks by INTENT, not exact phrase matching
-          * Include BOTH verbatim phrases AND semantic variations/synonyms
-          * Prioritize queries with HIGH SEARCH VOLUME (even if not exact article words)
-          * Think: "How would users Google this topic?" not just "What's in the article?"
-        - **Modern Rules (Google's Actual Behavior):**
-          ✅ **Verbatim from article:** "annual domestic demand between 20 and 40 tonnes"
-          ✅ **Synonym variation:** "yearly gold consumption in Bangladesh 20-40 tons" (HIGH search volume)
-          ✅ **Google Suggest queries:** "Bangladesh gold demand statistics" (what users type)
-          ✅ **Related high-volume searches:** "how much gold does Bangladesh import"
-          ✅ **Question variations:** Both formal and conversational versions
-          ✅ **Semantic equivalents:** "smuggling" = "illegal gold trade" = "gold trafficking"
-        - **What to Include:**
-          * Verbatim phrases from article (baseline)
-          * High-search synonyms (gold = bullion, price = cost = rate)
-          * Google autocomplete suggestions (what users actually type)
-          * Related queries users search (Search Console data patterns)
-          * Semantic variations (same meaning, different words)
-          * Question rephrasing (multiple ways to ask same thing)
-        - **Google Factors:** Semantic search (BERT/MUM), query understanding, synonym recognition, intent matching
-        - **Examples:** 
-          * "domestic gold prices aligned with global trends" (verbatim)
-          * "Bangladesh gold rates follow international bullion market" (synonym - HIGH search)
-          * "annual gold demand Bangladesh 20 to 40 tonnes" (variation)
-          * "yearly gold consumption statistics Bangladesh" (Google Suggest query)
-          * "how much gold is imported to Bangladesh each year" (user question)
-          * "Bangladesh gold smuggling revenue loss" (semantic equivalent)
+    **C. LONG-TAIL KEYWORDS - POPULAR LONG-QUERIES (500-5,000 monthly searches):**
+        - **Quantity:** 8-20 phrases (POPULAR long-tail, not random article sentences)
+        - **Length:** ANY length (usually 4-10 words for long-tail)
+        - **CRITICAL: SEARCH DEMAND FOR LONGER QUERIES**
+        
+        🎯 **POPULAR LONG-TAIL RESEARCH:**
+        
+        **Step 1:** Identify specific questions/queries users ask
+        **Step 2:** Think: "What POPULAR detailed searches exist?" (not rare phrases)
+        **Step 3:** Focus on 500-5,000 search volume long-tail
+        **Step 4:** Include Featured Snippet opportunities
+        
+        **🔥 POPULAR LONG-TAIL TARGETS (500-5,000 searches):**
+        
+        1. **POPULAR QUESTION QUERIES** (1,000-5,000 searches/month)
+           - "how to check gold purity" (practical question, high demand)
+           - "where to buy gold in Bangladesh" (commercial intent)
+           - "how to invest in gold Bangladesh" (investment interest)
+           - "when to buy gold in Bangladesh" (timing question)
+           - Think: Questions MANY people ask
+        
+        2. **SPECIFIC POPULAR SEARCHES** (500-2,000 searches/month)
+           - "gold price increase reason" (cause-seeking)
+           - "gold price prediction 2024 Bangladesh" (future-looking)
+           - "gold vs dollar investment Bangladesh" (comparison)
+           - "best time to buy gold" (decision-making)
+           - Think: Specific but still popular queries
+        
+        3. **COMMERCIAL LONG-TAIL** (500-3,000 searches/month)
+           - "gold price per bhori Bangladesh" (local unit)
+           - "gold jewellery price in Bangladesh today" (buyer intent)
+           - "second hand gold price" (resale market)
+           - "gold coin price Bangladesh" (investment product)
+           - Think: Buying/selling specific queries
+        
+        4. **INFORMATIONAL LONG-TAIL** (500-2,000 searches/month)
+           - "why gold price increasing 2024" (trending explanation)
+           - "gold price future forecast" (prediction interest)
+           - "gold price drop or rise" (directional interest)
+           - Think: Information-seeking with volume
+        
+        **❌ AVOID LOW-VOLUME PHRASES:**
+        - Random article sentences with no search demand (<100 searches)
+        - "domestic prices remain closely aligned with global market trends" (50 searches) ← SKIP
+        - "revenue losses from smuggling activities" (30 searches) ← SKIP
+        - Academic/technical phrasing with no proven search volume
+        
+        **✅ PRIORITIZE POPULAR LONG-TAIL:**
+        - Questions with proven search demand
+        - "How to" queries (usually high volume)
+        - "When to" timing questions
+        - "Where to" location questions
+        - Commercial long-tail (buying, selling, investing)
+        - Comparison queries (gold vs silver, etc.)
+        - Prediction/forecast queries (always popular)
+        
+        **SEARCH VOLUME EXAMPLES (Long-tail for Gold Article):**
+        
+        LONG-TAIL (POPULAR 500-5,000 searches):
+        1. "how to check gold purity at home" (4,000+ searches) INCLUDE
+        2. "where to buy gold in Dhaka" (3,500+ searches) INCLUDE
+        3. "gold price increase reason today" (2,800+ searches) INCLUDE
+        4. "when to buy gold in Bangladesh" (2,200+ searches) INCLUDE
+        5. "gold vs dollar which is better" (1,800+ searches) INCLUDE
+        6. "how to invest in gold Bangladesh" (1,500+ searches) INCLUDE
+        7. "gold price per bhori today" (1,200+ searches) INCLUDE
+        8. "best gold shop in Bangladesh" (1,000+ searches) INCLUDE
+        9. "gold price drop prediction" (800+ searches) INCLUDE
+        10. "gold price future forecast 2024" (600+ searches) INCLUDE
+        
+        RANDOM ARTICLE PHRASES (LOW/NO VOLUME - SKIP):
+        - "domestic demand between 20 tonnes and 40 tonnes annually" (20 searches) TOO LOW
+        - "alignment with global market trends persists" (5 searches) TOO LOW
+        - "policy framework under Gold Policy 2018" (10 searches) TOO LOW
+        
+        **Google Factors:**
+        - Search volume (500-5,000 sweet spot)
+        - Featured Snippet potential (questions!)
+        - Commercial intent
+        - Voice search compatibility
+        - Natural language patterns
+        - Proven user demand
 
     **D. SEMANTIC CONTEXT KEYWORDS (What Google Expects to See):**
         - **Quantity:** 5-8 keywords
@@ -668,21 +997,46 @@ const generatePrompt = (articleContent: string, contentType: string): string => 
           * Missing keywords competitors rank for (content gaps)
           * Differentiating factors (exclusive sources, data, perspectives)
 
-    **7. QUALITY VERIFICATION (Google Policy Checklist):** Before outputting JSON, verify:
-        - Target Focus Keywords: 1-10 (include HIGH search volume variations)
-        - Supporting Topic Keywords: 2-20 (article topics + related searches)
-        - User Query Variations: 3-30 (BOTH verbatim + semantic variations)
-        - Semantic Context Keywords: 3-10 (synonyms and related terms)
-        - Question-Intent Keywords: 2-15 (multiple ways to ask same thing)
-        - Named Entities: ALL extracted (comprehensive, typically 1-50+)
-        - ✅ **Included synonyms?** (price/rate/cost, smuggling/illegal trade)
-        - ✅ **Included high-search variations?** (how users actually Google it)
-        - ✅ **Checked semantic equivalents?** (same meaning, different words)
-        - ✅ **Related searches covered?** (what users also search for)
-        - ✅ **Google Autocomplete patterns?** (what appears in suggestions)
-        - No duplicates across categories
-        - Each keyword has clear rationale and search intent
-        - **CRITICAL:** Include article content + high-search variations (Google's intent matching)
+    **7. SEARCH VOLUME VERIFICATION (CRITICAL QUALITY CHECK):** Before outputting JSON:
+        
+        **PRIMARY KEYWORDS - SEARCH VOLUME CHECK:**
+        - ✅ Does EACH have 10,000+ monthly searches?
+        - ✅ Are these the BIGGEST searches for this topic in Bangladesh?
+        - ✅ Included "today" variations? (gold price today - massive volume)
+        - ✅ Included broad terms? (gold price, gold rate)
+        - ✅ Included geo-targeted high-volume? (Bangladesh gold price)
+        - ❌ NO low-volume specific phrases
+        - Target: 2-5 keywords with MASSIVE search demand
+        
+        **SECONDARY KEYWORDS - MEDIUM VOLUME CHECK:**
+        - ✅ Does EACH have 1,000-15,000 monthly searches?
+        - ✅ Checked "People Also Search For"?
+        - ✅ Included related high-demand topics?
+        - ✅ Included specific popular variations? (18k gold, per gram)
+        - ❌ NO niche academic terms
+        - Target: 5-12 keywords with proven search demand
+        
+        **LONG-TAIL KEYWORDS - POPULAR LONG-TAIL CHECK:**
+        - ✅ Does EACH have 500-5,000 monthly searches?
+        - ✅ Are these POPULAR questions? (how to, where to, when to)
+        - ✅ Included commercial long-tail? (best gold shop, where to buy)
+        - ✅ Included trending queries? (prediction, forecast)
+        - ❌ NO random article sentences with <100 searches
+        - ❌ SKIP "domestic demand between 20-40 tonnes" type phrases
+        - Target: 8-20 popular long-tail queries
+        
+        **OVERALL QUALITY:**
+        - ✅ ALL keywords have proven search volume (500+ minimum)
+        - ✅ Prioritized high-volume over low-volume
+        - ✅ Thought like SEMrush/Ahrefs (keyword research tool)
+        - ✅ Focused on POPULAR searches, not just article wording
+        - ✅ Included commercial intent where relevant
+        - ✅ Each keyword has search volume indicator (high/medium/low)
+        - ✅ No duplicates across categories
+        
+        **FINAL CHECK:**
+        "Would these keywords bring significant traffic if we ranked for them?"
+        If NO → Replace with higher-volume alternatives
 
     **8. OUTPUT FORMAT - CRITICAL:** 
     
@@ -787,23 +1141,76 @@ const generatePrompt = (articleContent: string, contentType: string): string => 
     
     **REMEMBER: Output ONLY the JSON object above. No markdown, no wrapper, no extra text.**
     
-    **CRITICAL IMPERATIVES - GOOGLE'S ACTUAL POLICY (2024-2025):**
-    1. 🎯 **GOOGLE RANKS BY INTENT, NOT EXACT WORDS** - Include high-search synonyms!
-    2. ⚠️ **QUALITY OVER QUANTITY** - Extract what EXISTS + high-volume variations
-    3. ✅ **PRIMARY:** Focus on HIGH search volume variations (how users actually Google it)
-    4. ✅ **SECONDARY:** Include article topics + Google's "Related Searches"
-    5. ✅ **LONG-TAIL:** BOTH verbatim phrases AND semantic variations/synonyms
-    6. 📊 **Think like Google Autocomplete** - What do users TYPE in the search box?
-    7. 🔄 **Synonyms are POWERFUL:** price = rate = cost, smuggling = illegal trade
-    8. ❌ STOP limiting to "exact article words" - ✅ START thinking "search demand"
-    9. 🌐 **Google understands semantics:** "gold prices" ranks for "bullion rates"
-    10. 📈 **Prioritize HIGH search volume** even if different wording than article
-    11. 🔍 **Check Related Searches:** "People also search for" = keyword goldmine
-    12. 🇧🇩 **Bangladesh context:** Include both formal and colloquial search terms
-    13. ❓ **Question keywords:** Multiple ways users ask the same thing
-    14. 🎪 **Featured Snippets:** Need natural, complete answers (not just article quotes)
-    15. 📏 **Short article? Fewer keywords. Long article? More keywords. = Both CORRECT**
-    16. 🎯 **MISSION:** Capture ALL ways users would search for this topic (not just article wording)
+    **CRITICAL IMPERATIVES - WORLD-CLASS SEO (SEARCH VOLUME FIRST):**
+    
+    🔥 **PARADIGM SHIFT - YOU ARE DOING KEYWORD RESEARCH, NOT EXTRACTION:**
+    
+    1. 📊 **SEARCH VOLUME IS #1 PRIORITY** - Not article wording!
+       - PRIMARY: Only include 10,000+ monthly searches
+       - SECONDARY: Focus on 1,000-15,000 monthly searches
+       - LONG-TAIL: Target 500-5,000 monthly searches (popular long-tail)
+    
+    2. 🎯 **THINK LIKE SEMRUSH/AHREFS:**
+       - Ask: "What are the BIGGEST searches in Bangladesh for this topic?"
+       - NOT: "What exact words are in this article?"
+       - Article = context. Search demand = target.
+    
+    3. ✅ **PRIMARY KEYWORDS (10,000+ searches):**
+       - Broad terms: "gold price", "gold rate", "gold price today"
+       - Geo-targeted: "Bangladesh gold price", "BD gold rate"
+       - Commercial: "22 carat gold price", "gold buying price"
+       - SIMPLE, POPULAR, BROAD = HIGH VOLUME
+    
+    4. ✅ **SECONDARY KEYWORDS (1,000-15,000 searches):**
+       - Related popular topics: "silver price", "dollar rate"
+       - Sub-topics: "gold investment", "gold market"
+       - Specific popular: "18k gold price", "gold chart"
+       - Check "People Also Search For" (proven demand)
+    
+    5. ✅ **LONG-TAIL (500-5,000 searches):**
+       - Popular questions: "how to check gold purity", "where to buy gold"
+       - Commercial long-tail: "gold price per bhori", "best gold shop"
+       - Trending: "gold price prediction 2024", "gold investment guide"
+       - ❌ AVOID random article sentences with <100 searches
+    
+    6. 🚫 **WHAT TO AVOID (LOW VOLUME):**
+       - Academic phrases: "macroeconomic factors influencing commodity markets"
+       - Technical jargon without search demand
+       - Random article sentences: "domestic demand between 20-40 tonnes"
+       - Long, specific phrases: "alignment with global market trends"
+       - If search volume is <500/month → SKIP IT (unless extremely relevant)
+    
+    7. 📈 **PRIORITIZE:**
+       - "Today" variations (gold price today - massive daily searches)
+       - Simple broad terms (gold, gold price, gold rate)
+       - Commercial intent (buying, selling, price, rate)
+       - Questions with volume (how to, where to, when to)
+       - Local variations (Bangladesh, Dhaka, BD)
+    
+    8. 🎪 **FEATURED SNIPPET OPPORTUNITIES:**
+       - Target POPULAR questions (1,000+ searches)
+       - "How to" questions with proven demand
+       - "When to" timing questions
+       - "Where to" location questions
+    
+    9. 🇧🇩 **BANGLADESH HIGH-VOLUME SEARCHES:**
+       - Local units: "per bhori", "per vori"
+       - Cities: "Dhaka", "Chittagong"
+       - Abbreviations: "BD" (Bangladesh commonly abbreviated)
+    
+    10. 🔄 **SYNONYMS (ALL must have high volume):**
+        - price = rate = cost (check which has higher volume)
+        - gold = bullion (gold typically higher in Bangladesh)
+        - buy = purchase = invest (buy usually highest)
+    
+    11. 🎯 **QUALITY CHECK:**
+        - Does this keyword have 500+ monthly searches? If NO → SKIP
+        - Is this a POPULAR search in Bangladesh? If NO → SKIP
+        - Would MANY people search this? If NO → SKIP
+    
+    12. 🌐 **MISSION:**
+        Find the HIGHEST search volume keywords related to this topic.
+        Think: Keyword research tool, not content extractor.
     
     **Your mission:** Make The Daily Star rank #1 by understanding USER INTENT and SEMANTIC CONTEXT, not outdated word-count rules. Execute with modern SEO precision.
   `;
@@ -892,13 +1299,13 @@ export const generateKeywords = async (
       if (jsonBlockMatch && jsonBlockMatch[1]) {
         console.log("Found JSON in code block");
         jsonText = jsonBlockMatch[1].trim();
-      } else {
+        } else {
         // Strategy 3: Find JSON object anywhere in text
         const objectMatch = jsonText.match(/\{[\s\S]*\}/);
-        if (objectMatch) {
+           if (objectMatch) {
           console.log("Found JSON object in text");
           jsonText = objectMatch[0];
-        } else {
+           } else {
           // Strategy 4: Try to find after common prefixes
           const afterPrefixMatch = jsonText.match(/(?:Here's|Here is|Output:|Result:)?\s*(\{[\s\S]*\})/i);
           if (afterPrefixMatch && afterPrefixMatch[1]) {
