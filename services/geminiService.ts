@@ -74,11 +74,11 @@ const validateKeywordResult = (data: any): data is Omit<KeywordResult, 'searchRe
     return allValid;
   };
 
-  // Core required fields with flexible modern quantities
+  // Core required fields with VERY FLEXIBLE quantities (quality over quantity)
   const coreValid = (
-    validateKeywordArray(data.primary, 2, 5, 'Target Focus keywords (flexible: 2-5 based on article scope)') &&
-    validateKeywordArray(data.secondary, 5, 12, 'Supporting Topic keywords (flexible: 5-12 based on complexity)') &&
-    validateKeywordArray(data.longtail, 8, 20, 'User Query Variations (flexible: 8-20 based on content richness)') &&
+    validateKeywordArray(data.primary, 1, 10, 'Target Focus keywords (1-10, flexible based on article scope)') &&
+    validateKeywordArray(data.secondary, 2, 20, 'Supporting Topic keywords (2-20, flexible based on complexity)') &&
+    validateKeywordArray(data.longtail, 3, 30, 'User Query Variations (3-30, flexible based on content richness)') &&
     typeof data.competitorInsights === 'string' &&
     data.competitorInsights.trim().length > 0
   );
@@ -217,7 +217,7 @@ const generateBanglaPrompt = (articleContent: string, contentType: string, langu
     **MODERN BANGLA SEO:** Same intent-driven approach as English, but adapted for Bangla search behavior (40% longer queries, more conversational).
 
     **A. TARGET FOCUS KEYWORDS (লক্ষ্য কীওয়ার্ড - মূল বিষয়):**
-        - Quantity: 2-5 keywords (flexible based on article)
+        - Quantity: 1-10 keywords (VERY FLEXIBLE - extract what exists naturally)
         - Length: ANY length in Bangla (can be 1-15+ words) - NO LIMITS
         - Provide BOTH: Bangla script + English transliteration
         - Purpose: Core topic and primary search intent
@@ -228,7 +228,7 @@ const generateBanglaPrompt = (articleContent: string, contentType: string, langu
         - Remember: Bangla users search 40% longer - embrace complete phrases!
     
     **B. SUPPORTING TOPIC KEYWORDS (সহায়ক বিষয় কীওয়ার্ড):**
-        - Quantity: 5-12 keywords (varies by complexity)
+        - Quantity: 2-20 keywords (VERY FLEXIBLE - varies by article length)
         - Length: ANY length (2-10+ words in Bangla) - focus on THEMES
         - Extract SUB-TOPICS and CONCEPTS, not just entities
         - Examples:
@@ -239,7 +239,7 @@ const generateBanglaPrompt = (articleContent: string, contentType: string, langu
         - BOTH scripts for all keywords
     
     **C. USER QUERY VARIATIONS (ব্যবহারকারী অনুসন্ধান বৈচিত্র):**
-        - Quantity: 8-20 phrases (varies by content richness)
+        - Quantity: 3-30 phrases (VERY FLEXIBLE - extract naturally, don't invent)
         - Length: ANY length (3-20+ words) - match NATURAL Bangla queries
         - Bangla queries are LONGER and more conversational
         - Examples:
@@ -380,19 +380,22 @@ const generateBanglaPrompt = (articleContent: string, contentType: string, langu
     **REMEMBER: Output ONLY the JSON object above. No markdown, no wrapper, no extra text.**
 
     **CRITICAL FOR THE DAILY STAR BANGLA - MODERN APPROACH:**
-    1. ❌ NO word count limits - ✅ Bangla users search LONGER (40% more than English)
-    2. EVERY keyword in BOTH Bangla script AND English transliteration (MANDATORY)
-    3. Target Focus = ANY length that captures intent (can be 1-15+ words in Bangla)
-    4. Supporting Topics = THEMES/CONCEPTS in Bangla, not just entity dumps
-    5. User Queries = NATURAL conversational Bangla (embrace 10-20 word phrases!)
-    6. Code-switching is NATURAL: "বাংলাদেশ economy" is how people search
-    7. Bangla Featured Snippets 70% EASIER - massive opportunity!
-    8. Voice search in Bangla growing 200%/year - optimize for questions
-    9. Proper Unicode (U+0980-U+09FF) MANDATORY
-    10. Numbers in BOTH scripts: "২০২৪" and "2024"
-    11. Dhaka standard preferred (শুদ্ধ Bangla)
-    12. Bilingual meta tags = DUAL visibility (Bangla + English searches)
-    13. Focus on WHAT users want to know, not arbitrary categorization
+    1. ⚠️ **QUALITY OVER QUANTITY** - Extract what EXISTS in the article, don't force counts
+    2. ❌ NO word count limits - ✅ Bangla users search LONGER (40% more than English)
+    3. EVERY keyword in BOTH Bangla script AND English transliteration (MANDATORY)
+    4. Target Focus = ANY length that captures intent (can be 1-15+ words in Bangla)
+    5. Supporting Topics = THEMES/CONCEPTS in Bangla, not just entity dumps
+    6. User Queries = NATURAL conversational Bangla (embrace 10-20 word phrases!)
+    7. Code-switching is NATURAL: "বাংলাদেশ economy" is how people search
+    8. Bangla Featured Snippets 70% EASIER - massive opportunity!
+    9. Voice search in Bangla growing 200%/year - optimize for questions
+    10. Proper Unicode (U+0980-U+09FF) MANDATORY
+    11. Numbers in BOTH scripts: "২০২৪" and "2024"
+    12. Dhaka standard preferred (শুদ্ধ Bangla)
+    13. Bilingual meta tags = DUAL visibility (Bangla + English searches)
+    14. ❌ NO invented keywords - extract verbatim from article only
+    15. Short article? Fewer keywords is CORRECT. Long article? More keywords is natural.
+    16. Focus on WHAT users want to know, not arbitrary categorization
 
     **Your Mission:** Make দ্য ডেইলি স্টার বাংলা rank #1 by understanding Bangla SEARCH INTENT and natural language patterns. Execute with modern বাংলা SEO expertise!
     `;
@@ -464,7 +467,7 @@ const generatePrompt = (articleContent: string, contentType: string): string => 
     Organize keywords by HOW and WHY users search, not by arbitrary length categories.
 
     **A. TARGET FOCUS KEYWORDS (Primary Intent - What This Article Is About):**
-        - **Quantity:** 2-4 keywords (flexible based on article scope)
+        - **Quantity:** 1-10 keywords (VERY FLEXIBLE - extract what exists, don't force it)
         - **Length:** ANY length that captures complete user intent (can be 1-10+ words)
         - **SEO Purpose:** Define the core topic and primary search intent this article serves
         - **Modern Rules:**
@@ -482,7 +485,7 @@ const generatePrompt = (articleContent: string, contentType: string): string => 
           * "impact of smuggling on Bangladesh economy" (informational - cause)
 
     **B. SUPPORTING TOPIC KEYWORDS (Content Depth - What Sub-Topics Are Covered):**
-        - **Quantity:** 6-10 keywords (varies by article complexity)
+        - **Quantity:** 2-20 keywords (VERY FLEXIBLE - varies by article complexity and length)
         - **Length:** ANY length (2-8+ words) - focus on complete topics, not word limits
         - **SEO Purpose:** Demonstrate topical breadth, semantic coverage, subject matter expertise
         - **Modern Rules:**
@@ -502,7 +505,7 @@ const generatePrompt = (articleContent: string, contentType: string): string => 
           * "consumer gold demand patterns"
 
     **C. USER QUERY VARIATIONS (How Real People Search This Topic):**
-        - **Quantity:** 10-15 phrases (varies by content richness)
+        - **Quantity:** 3-30 phrases (VERY FLEXIBLE - extract what exists naturally, don't invent)
         - **Length:** ANY length that matches natural search queries (3-15+ words)
         - **SEO Purpose:** Match actual search queries, capture long-tail traffic, Featured Snippets
         - **Modern Rules:**
@@ -623,15 +626,16 @@ const generatePrompt = (articleContent: string, contentType: string): string => 
           * Differentiating factors (exclusive sources, data, perspectives)
 
     **7. QUALITY VERIFICATION:** Before outputting JSON, verify:
-        - Target Focus Keywords: 2-5 keywords (each represents distinct primary intent)
-        - Supporting Topic Keywords: 5-12 keywords (varies by article complexity)
-        - User Query Variations: 8-20 phrases (varies by content richness)
-        - Semantic Context Keywords: 5-8 keywords
-        - Question-Intent Keywords: 5-10 questions
-        - Named Entities: ALL extracted (comprehensive, typically 5-20+)
+        - Target Focus Keywords: 1-10 keywords (FLEXIBLE - extract what exists, quality over quantity)
+        - Supporting Topic Keywords: 2-20 keywords (FLEXIBLE - varies by article length/complexity)
+        - User Query Variations: 3-30 phrases (FLEXIBLE - extract naturally, don't force it)
+        - Semantic Context Keywords: 3-10 keywords (flexible)
+        - Question-Intent Keywords: 2-15 questions (flexible, based on content)
+        - Named Entities: ALL extracted (comprehensive, typically 1-50+)
         - All keywords/phrases extracted verbatim from article
         - No duplicates across categories
         - Each keyword has clear rationale and search intent
+        - **CRITICAL:** Quality beats quantity - extract what's ACTUALLY in the article, don't invent keywords to meet targets
 
     **8. OUTPUT FORMAT - CRITICAL:** 
     
@@ -737,16 +741,18 @@ const generatePrompt = (articleContent: string, contentType: string): string => 
     **REMEMBER: Output ONLY the JSON object above. No markdown, no wrapper, no extra text.**
     
     **CRITICAL IMPERATIVES - MODERN SEO (2024-2025):**
-    1. ❌ STOP organizing by word count - ✅ START organizing by SEARCH INTENT
-    2. Target Focus keywords can be ANY length (1-10+ words) - capture complete user intent
-    3. Supporting Topics = THEMES/CONCEPTS, not just entity lists
-    4. User Query Variations = EXACTLY how people search (verbatim from article, any length)
-    5. Extract ALL entities separately - don't mix with topic keywords
-    6. Question keywords = Featured Snippet gold mines (complete, natural questions)
-    7. Bangladesh context is MANDATORY - local SEO dominates international
-    8. Meta tags must be compelling - CTR is a major ranking factor
-    9. NO invented keywords - extract verbatim from article only
-    10. Focus on WHAT users want to know, not arbitrary categorization rules
+    1. ⚠️ **QUALITY OVER QUANTITY** - Extract what EXISTS, don't force keyword counts
+    2. ❌ STOP organizing by word count - ✅ START organizing by SEARCH INTENT
+    3. Target Focus keywords can be ANY length (1-10+ words) - capture complete user intent
+    4. Supporting Topics = THEMES/CONCEPTS, not just entity lists
+    5. User Query Variations = EXACTLY how people search (verbatim from article, any length)
+    6. Extract ALL entities separately - don't mix with topic keywords
+    7. Question keywords = Featured Snippet gold mines (complete, natural questions)
+    8. Bangladesh context is MANDATORY - local SEO dominates international
+    9. Meta tags must be compelling - CTR is a major ranking factor
+    10. ❌ NO invented keywords - extract verbatim from article only
+    11. Short article? Fewer keywords is CORRECT. Long article? More keywords is natural.
+    12. Focus on WHAT users want to know, not arbitrary categorization rules
     
     **Your mission:** Make The Daily Star rank #1 by understanding USER INTENT and SEMANTIC CONTEXT, not outdated word-count rules. Execute with modern SEO precision.
   `;
@@ -895,9 +901,10 @@ export const generateKeywords = async (
       };
       
       throw new Error(
-        `AI response has invalid keyword counts for modern SEO optimization. ` +
-        `Expected: Target Focus (2-5), Supporting Topics (5-12), User Query Variations (8-20). ` +
+        `AI response has invalid keyword counts. ` +
+        `Expected: Target Focus (1-10), Supporting Topics (2-20), User Query Variations (3-30). ` +
         `Received: Target Focus (${counts.primary}), Supporting Topics (${counts.secondary}), User Queries (${counts.longtail}). ` +
+        `This usually indicates the AI didn't extract enough keywords from the article. ` +
         `Please try again or use Deep Analysis mode for better results.`
       );
     }
