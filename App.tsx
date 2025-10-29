@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useRef } from 'react';
 import { generateKeywords } from './services/geminiService';
+import { generateKeywordsWithOpenAI } from './services/openaiService';
 import type { KeywordResult } from './types';
 import { KeywordCard } from './components/KeywordCard';
 import Loader from './components/Loader';
@@ -12,6 +13,14 @@ const App: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<KeywordResult | null>(null);
   const [useDeepAnalysis, setUseDeepAnalysis] = useState(false);
+  
+  // AI Provider selection: 'gemini' or 'openai'
+  const [aiProvider, setAiProvider] = useState<'gemini' | 'openai'>('gemini');
+  
+  // OpenAI API key (stored in localStorage for persistence)
+  const [openaiApiKey, setOpenaiApiKey] = useState<string>(() => {
+    return localStorage.getItem('openai_api_key') || '';
+  });
   
   // Ref to track and cancel in-flight requests
   const abortControllerRef = useRef<AbortController | null>(null);
@@ -162,7 +171,17 @@ const App: React.FC = () => {
       // --- End of Fetching Logic ---
 
       // --- Start of Generation Logic ---
-      const generatedResult = await generateKeywords(fetchedContent, useDeepAnalysis);
+      let generatedResult: KeywordResult;
+      
+      if (aiProvider === 'openai') {
+        if (!openaiApiKey || openaiApiKey.trim() === '') {
+          throw new Error('OpenAI API key is required. Please enter your API key in the settings.');
+        }
+        generatedResult = await generateKeywordsWithOpenAI(fetchedContent, useDeepAnalysis, openaiApiKey);
+      } else {
+        generatedResult = await generateKeywords(fetchedContent, useDeepAnalysis);
+      }
+      
       setResult(generatedResult);
       // --- End of Generation Logic ---
 
@@ -186,7 +205,7 @@ const App: React.FC = () => {
       clearTimeout(timeoutId);
       setIsLoading(false);
     }
-  }, [articleUrl, useDeepAnalysis]);
+  }, [articleUrl, useDeepAnalysis, aiProvider, openaiApiKey]);
 
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
@@ -205,7 +224,17 @@ const App: React.FC = () => {
     setResult(null);
 
     try {
-      const generatedResult = await generateKeywords(articleContent, useDeepAnalysis);
+      let generatedResult: KeywordResult;
+      
+      if (aiProvider === 'openai') {
+        if (!openaiApiKey || openaiApiKey.trim() === '') {
+          throw new Error('OpenAI API key is required. Please enter your API key in the settings.');
+        }
+        generatedResult = await generateKeywordsWithOpenAI(articleContent, useDeepAnalysis, openaiApiKey);
+      } else {
+        generatedResult = await generateKeywords(articleContent, useDeepAnalysis);
+      }
+      
       setResult(generatedResult);
     } catch (err) {
       console.error("Error generating keywords:", err);
@@ -225,7 +254,7 @@ const App: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [articleContent, useDeepAnalysis]);
+  }, [articleContent, useDeepAnalysis, aiProvider, openaiApiKey]);
 
   return (
     <div className="min-h-screen bg-brand-bg text-gray-200 font-sans">
@@ -335,6 +364,72 @@ const App: React.FC = () => {
                 ></textarea>
               </div>
 
+              {/* AI Provider Selection */}
+              <div className="mt-6 p-4 bg-brand-card border border-brand-border rounded-lg">
+                <label className="block text-sm font-medium text-gray-300 mb-3">
+                  🤖 AI Provider (Choose for Reliability)
+                </label>
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setAiProvider('gemini')}
+                    disabled={isLoading}
+                    className={`p-3 rounded-lg border-2 transition-all ${
+                      aiProvider === 'gemini'
+                        ? 'border-brand-primary bg-brand-primary/20 text-white'
+                        : 'border-brand-border bg-brand-bg text-gray-400 hover:border-gray-500'
+                    } disabled:opacity-50`}
+                  >
+                    <div className="font-bold">Google Gemini</div>
+                    <div className="text-xs mt-1">Free, Fast</div>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setAiProvider('openai')}
+                    disabled={isLoading}
+                    className={`p-3 rounded-lg border-2 transition-all ${
+                      aiProvider === 'openai'
+                        ? 'border-brand-primary bg-brand-primary/20 text-white'
+                        : 'border-brand-border bg-brand-bg text-gray-400 hover:border-gray-500'
+                    } disabled:opacity-50`}
+                  >
+                    <div className="font-bold">ChatGPT (OpenAI)</div>
+                    <div className="text-xs mt-1">Most Reliable</div>
+                  </button>
+                </div>
+                
+                {/* OpenAI API Key Input */}
+                {aiProvider === 'openai' && (
+                  <div className="mt-4">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                      OpenAI API Key
+                      <a 
+                        href="https://platform.openai.com/api-keys" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="ml-2 text-xs text-brand-primary hover:underline"
+                      >
+                        (Get API Key)
+                      </a>
+                    </label>
+                    <input
+                      type="password"
+                      value={openaiApiKey}
+                      onChange={(e) => {
+                        setOpenaiApiKey(e.target.value);
+                        localStorage.setItem('openai_api_key', e.target.value);
+                      }}
+                      placeholder="sk-..."
+                      className="w-full p-3 bg-brand-bg border border-brand-border rounded-md focus:ring-2 focus:ring-brand-primary focus:outline-none transition-all"
+                      disabled={isLoading}
+                    />
+                    <p className="text-xs text-gray-500 mt-1">
+                      Your API key is stored locally and never sent to our servers.
+                    </p>
+                  </div>
+                )}
+              </div>
+
               <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <label className="flex items-center cursor-pointer select-none">
                   <span className="mr-3 text-sm font-medium text-gray-300">Deep Analysis</span>
@@ -360,7 +455,10 @@ const App: React.FC = () => {
                 </button>
               </div>
                <p className="text-xs text-gray-500 mt-2 text-center sm:text-left">
-                  {useDeepAnalysis ? "Using Gemini 2.5 Pro (Deep thinking, best quality)" : "Using Gemini 2.0 Flash (Fast, efficient)"}
+                  {aiProvider === 'gemini' 
+                    ? (useDeepAnalysis ? "Using Gemini 2.5 Pro (Deep thinking, best quality)" : "Using Gemini 2.0 Flash (Fast, efficient)")
+                    : (useDeepAnalysis ? "Using GPT-4 Turbo (Most powerful, best quality)" : "Using GPT-3.5 Turbo (Fast, efficient)")
+                  }
                 </p>
             </form>
           </div>

@@ -1397,3 +1397,6 @@ export const generateKeywords = async (
     throw new Error("An error occurred while generating keywords. Please check your connection and API key, then try again.");
   }
 };
+
+// Export helper functions for reuse in other AI services (e.g., OpenAI)
+export { detectLanguage, detectContentType, generatePrompt, generateBanglaPrompt, validateKeywordResult };
