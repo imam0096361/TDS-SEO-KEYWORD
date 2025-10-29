@@ -321,10 +321,23 @@ const generateBanglaPrompt = (articleContent: string, contentType: string, langu
        - Missing Bangla keywords
        - Differentiation in Bengali market
 
-    **OUTPUT FORMAT (CRITICAL):**
-    Respond ONLY with valid JSON. For Bangla keywords, provide BOTH scripts:
+    **OUTPUT FORMAT - CRITICAL:**
+    
+    ⚠️ **MANDATORY JSON-ONLY OUTPUT** ⚠️
+    
+    - Respond with PURE JSON object ONLY
+    - NO markdown code blocks (no \`\`\`json)
+    - NO explanatory text before or after
+    - NO commentary or notes
+    - Start with { and end with }
+    - Must be valid, parseable JSON
+    - For Bangla keywords, provide BOTH scripts (Bangla + English)
+    
+    **If you include ANY text other than the JSON object, the system will fail.**
+    
+    **EXAMPLE JSON STRUCTURE (Bangla Bilingual):**
+    
 
-    \`\`\`json
     {
       "primary": [
         {
@@ -363,7 +376,8 @@ const generateBanglaPrompt = (articleContent: string, contentType: string, langu
       "banglaSearchInsights": "বাংলায় অনুসন্ধানকারীরা ইংরেজির চেয়ে ৪০% দীর্ঘ প্রশ্ন করেন... (Bangla searchers use 40% longer queries than English...)",
       "transliterationGuide": "সোনা = sona (gold), দাম = dam (price), অর্থনীতি = orthoniti (economy)"
     }
-    \`\`\`
+    
+    **REMEMBER: Output ONLY the JSON object above. No markdown, no wrapper, no extra text.**
 
     **CRITICAL FOR THE DAILY STAR BANGLA - MODERN APPROACH:**
     1. ❌ NO word count limits - ✅ Bangla users search LONGER (40% more than English)
@@ -619,10 +633,21 @@ const generatePrompt = (articleContent: string, contentType: string): string => 
         - No duplicates across categories
         - Each keyword has clear rationale and search intent
 
-    **8. OUTPUT FORMAT:** Respond ONLY with a valid JSON object. No markdown, no extra text.
+    **8. OUTPUT FORMAT - CRITICAL:** 
+    
+    ⚠️ **MANDATORY JSON-ONLY OUTPUT** ⚠️
+    
+    - Respond with PURE JSON object ONLY
+    - NO markdown code blocks (no \`\`\`json)
+    - NO explanatory text before or after
+    - NO commentary or notes
+    - Start with { and end with }
+    - Must be valid, parseable JSON
+    
+    **If you include ANY text other than the JSON object, the system will fail.**
 
-    **COMPLETE JSON STRUCTURE (Modern Intent-Driven SEO):**
-    \`\`\`json
+    **EXAMPLE JSON STRUCTURE (Modern Intent-Driven SEO):**
+    
     {
       "primary": [
         { 
@@ -708,7 +733,8 @@ const generatePrompt = (articleContent: string, contentType: string): string => 
         "Local competitor: Prothom Alo coverage gap"
       ]
     }
-    \`\`\`
+    
+    **REMEMBER: Output ONLY the JSON object above. No markdown, no wrapper, no extra text.**
     
     **CRITICAL IMPERATIVES - MODERN SEO (2024-2025):**
     1. ❌ STOP organizing by word count - ✅ START organizing by SEARCH INTENT
@@ -753,10 +779,11 @@ export const generateKeywords = async (
         model: 'gemini-2.0-flash-thinking-exp-01-21',
         contents: prompt,
         config: {
-          temperature: 0.3, // Lower temperature for more consistent, accurate results
+          temperature: 0.2, // Even lower for maximum consistency
           topP: 0.8,
           topK: 40,
           maxOutputTokens: 8192, // Allow longer, more comprehensive responses
+          responseMimeType: 'application/json', // Force JSON output
         },
       });
     } else {
@@ -766,10 +793,11 @@ export const generateKeywords = async (
         model: 'gemini-2.0-flash-exp',
         contents: prompt,
         config: {
-          temperature: 0.4,
-          topP: 0.9,
+          temperature: 0.2, // Lower for more consistent JSON
+          topP: 0.85,
           topK: 40,
           maxOutputTokens: 4096,
+          responseMimeType: 'application/json', // Force JSON output
         },
       });
     }
@@ -795,28 +823,67 @@ export const generateKeywords = async (
       throw new Error("Received empty response from AI. This may indicate an API quota issue or invalid API key. Please check your Gemini API key and quota.");
     }
     
-    // Extract JSON from markdown code blocks if present
-    if (!text.startsWith('{')) {
-        const jsonMatch = text.match(/```json\s*([\s\S]*?)\s*```/);
-        if (jsonMatch && jsonMatch[1]) {
-           text = jsonMatch[1].trim();
+    // Robust JSON extraction with multiple fallback strategies
+    let jsonText = text.trim();
+    
+    // Strategy 1: Already pure JSON
+    if (!jsonText.startsWith('{')) {
+      console.log("JSON not at start, trying extraction strategies...");
+      
+      // Strategy 2: Extract from markdown code blocks (```json ... ```)
+      const jsonBlockMatch = jsonText.match(/```(?:json)?\s*([\s\S]*?)\s*```/);
+      if (jsonBlockMatch && jsonBlockMatch[1]) {
+        console.log("Found JSON in code block");
+        jsonText = jsonBlockMatch[1].trim();
+      } else {
+        // Strategy 3: Find JSON object anywhere in text
+        const objectMatch = jsonText.match(/\{[\s\S]*\}/);
+        if (objectMatch) {
+          console.log("Found JSON object in text");
+          jsonText = objectMatch[0];
         } else {
-           // Try to find any JSON object in the response
-           const objectMatch = text.match(/\{[\s\S]*\}/);
-           if (objectMatch) {
-             text = objectMatch[0];
-           } else {
-             throw new SyntaxError("No valid JSON found in the AI's response. Response: " + text.substring(0, 200));
-           }
+          // Strategy 4: Try to find after common prefixes
+          const afterPrefixMatch = jsonText.match(/(?:Here's|Here is|Output:|Result:)?\s*(\{[\s\S]*\})/i);
+          if (afterPrefixMatch && afterPrefixMatch[1]) {
+            console.log("Found JSON after prefix");
+            jsonText = afterPrefixMatch[1];
+          } else {
+            console.error("No JSON found. Raw response:", text.substring(0, 500));
+            throw new SyntaxError(
+              "The AI did not return valid JSON. This is a format error. " +
+              "Please try again. If the issue persists, try Deep Analysis mode. " +
+              `Response preview: ${text.substring(0, 200)}...`
+            );
+          }
         }
+      }
     }
     
-    // Parse JSON
+    // Clean up the JSON text
+    jsonText = jsonText.trim();
+    
+    // Remove any trailing text after the JSON object
+    const lastBrace = jsonText.lastIndexOf('}');
+    if (lastBrace !== -1 && lastBrace < jsonText.length - 1) {
+      jsonText = jsonText.substring(0, lastBrace + 1);
+    }
+    
+    // Parse JSON with detailed error reporting
     let parsedResult;
     try {
-      parsedResult = JSON.parse(text);
+      parsedResult = JSON.parse(jsonText);
+      console.log("Successfully parsed JSON");
     } catch (parseError) {
-      throw new SyntaxError(`Failed to parse JSON response. Error: ${parseError instanceof Error ? parseError.message : 'Unknown parse error'}`);
+      console.error("JSON parse error:", parseError);
+      console.error("Attempted to parse:", jsonText.substring(0, 500));
+      
+      // Try to provide helpful error message
+      const errorMsg = parseError instanceof Error ? parseError.message : 'Unknown parse error';
+      throw new SyntaxError(
+        `Failed to parse AI response as JSON. ${errorMsg}. ` +
+        `This usually means the AI didn't follow the JSON format correctly. ` +
+        `Please try again or use Deep Analysis mode for better results.`
+      );
     }
     
     // Validate the structure
