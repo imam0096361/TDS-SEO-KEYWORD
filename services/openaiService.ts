@@ -59,15 +59,36 @@ export const generateKeywordsWithOpenAI = async (
       messages: [
         {
           role: 'system',
-          content: 'You are a world-class SEO keyword research specialist. You must respond with ONLY valid JSON, no markdown, no explanations, just pure JSON.'
+          content: `You are a world-class SEO keyword research specialist for The Daily Star Bangladesh.
+
+CRITICAL REQUIREMENTS:
+1. You MUST respond with ONLY valid JSON (no markdown, no explanations)
+2. You MUST include ALL required fields:
+   - primary: array with at least 1 keyword object
+   - secondary: array with at least 2 keyword objects  
+   - longtail: array with at least 3 keyword objects
+   - competitorInsights: non-empty string
+   - metaTitle: string
+   - metaDescription: string
+   - seoScore: number
+
+3. Each keyword object MUST have:
+   - term: string (the keyword)
+   - rationale: string (why this keyword)
+   - searchIntent: string
+   - searchVolume: string
+
+4. Focus on HIGH search volume keywords (10,000+ for primary, 1,000-15,000 for secondary, 500-5,000 for long-tail)
+
+If the article seems short, still provide the MINIMUM required keywords with your best analysis.`
         },
         {
           role: 'user',
           content: prompt
         }
       ],
-      temperature: 0.2, // Low temperature for consistent, focused output
-      max_tokens: useDeepAnalysis ? 4096 : 2048,
+      temperature: 0.3, // Slightly higher for more comprehensive output
+      max_tokens: useDeepAnalysis ? 8192 : 4096, // Increased for complete responses
       response_format: { type: "json_object" }, // Force JSON output
     });
     
@@ -119,6 +140,15 @@ export const generateKeywordsWithOpenAI = async (
     try {
       parsedResult = JSON.parse(jsonText);
       console.log("JSON parsed successfully");
+      console.log("Parsed result structure:", {
+        hasPrimary: !!parsedResult.primary,
+        primaryCount: parsedResult.primary?.length || 0,
+        hasSecondary: !!parsedResult.secondary,
+        secondaryCount: parsedResult.secondary?.length || 0,
+        hasLongtail: !!parsedResult.longtail,
+        longtailCount: parsedResult.longtail?.length || 0,
+        hasCompetitorInsights: !!parsedResult.competitorInsights
+      });
     } catch (parseError) {
       const errorMsg = parseError instanceof Error ? parseError.message : 'Unknown parsing error';
       console.error("JSON parsing failed:", errorMsg);
@@ -130,12 +160,31 @@ export const generateKeywordsWithOpenAI = async (
     const isValid = validateKeywordResult(parsedResult);
     
     if (!isValid) {
-      console.error("Validation failed - OpenAI returned incomplete keyword data");
+      // Provide detailed feedback about what's missing
+      const counts = {
+        primary: parsedResult.primary?.length || 0,
+        secondary: parsedResult.secondary?.length || 0,
+        longtail: parsedResult.longtail?.length || 0,
+        hasCompetitorInsights: !!parsedResult.competitorInsights && parsedResult.competitorInsights.trim().length > 0
+      };
+      
+      console.error("Validation failed - Detailed counts:", counts);
+      console.error("Full parsed result:", parsedResult);
+      
+      const missingFields = [];
+      if (counts.primary < 1) missingFields.push(`Primary keywords (got ${counts.primary}, need at least 1)`);
+      if (counts.secondary < 2) missingFields.push(`Secondary keywords (got ${counts.secondary}, need at least 2)`);
+      if (counts.longtail < 3) missingFields.push(`Long-tail keywords (got ${counts.longtail}, need at least 3)`);
+      if (!counts.hasCompetitorInsights) missingFields.push("Competitor insights (missing or empty)");
+      
       throw new Error(
-        `OpenAI returned incomplete keyword data. ` +
-        `Please check the console for details. ` +
-        `This usually means the article is too short or the AI needs more context. ` +
-        `Try using "Deep Analysis Mode" for better results, or ensure your article is at least 200+ words.`
+        `OpenAI returned incomplete keyword data:\n\n` +
+        `Missing or insufficient: ${missingFields.join(', ')}\n\n` +
+        `This usually means:\n` +
+        `1. Article might be too short (ensure 200+ words)\n` +
+        `2. Try "Deep Analysis Mode" for better results\n` +
+        `3. The AI might need a second attempt - try again\n\n` +
+        `Check browser console (F12) for detailed response.`
       );
     }
     
