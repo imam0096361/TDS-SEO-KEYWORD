@@ -205,10 +205,26 @@ const generateBanglaPrompt = (articleContent: string, contentType: string, langu
     - Voice search growing 200% annually
     - Featured Snippets 70% LESS competitive
 
-    **CRITICAL RULE:** Every keyword must pass this test:
+    **CRITICAL RULES:** Every keyword must pass these tests:
     ✅ Is it in the article or strongly implied?
     ✅ Would searching this term lead users to THIS article?
     ✅ Does it match the article's specific angle/story?
+    ✅ **DATES/YEARS ARE ACCURATE** - Never hallucinate or use wrong years!
+
+    **⚠️ TEMPORAL ACCURACY (CRITICAL FOR BANGLA):**
+    - Extract dates/years EXACTLY as mentioned in article
+    - If article says "আগামী ফেব্রুয়ারিতে" (upcoming February) → Infer correct FUTURE year
+    - If article says "২০২৬ সালের নির্বাচন" → Use ২০২৬, NOT ২০২৪!
+    - Context clues: "আগামী" (upcoming), "পরবর্তী" (next) → Future dates
+    - NEVER use past years (২০২৪, ২০২৩) for future events
+    - If unsure of exact year, use month/event only: "ফেব্রুয়ারিতে নির্বাচন"
+    - For questions, match the year: "গণভোট কবে হবে ২০২৬" NOT "২০২৪"
+
+    **Examples:**
+    ❌ WRONG: "নির্বাচন ২০২৪" (if article mentions 2026 or "আগামী" for future)
+    ✅ CORRECT: "নির্বাচন ২০২৬" (matches article's future context)
+    ❌ WRONG: "গণভোট কবে হবে ২০২৪" (hallucinated old year)
+    ✅ CORRECT: "গণভোট কবে হবে ২০২৬" (correct year from article context)
 
     **A. PRIMARY KEYWORDS (প্রাথমিক কীওয়ার্ড) - 2-5 keywords:**
         - **What:** Main topics, events, or entities this Bangla article is about
@@ -343,6 +359,7 @@ const generateBanglaPrompt = (articleContent: string, contentType: string, langu
     - Balance article-relevance with search-worthiness
     - Make this SPECIFIC Bangla article rank
     - Embrace longer Bangla queries (40% longer than English is natural)
+    - **DATES/YEARS MUST BE ACCURATE** - Extract exact years from article, never hallucinate!
     `;
 };
 
@@ -392,10 +409,26 @@ const generatePrompt = (articleContent: string, contentType: string): string => 
     2. **Search-worthy** - Terms users actually search for
     3. **Intent-matched** - Aligned with how people search for this story
 
-    **CRITICAL RULE:** Every keyword must pass this test:
+    **CRITICAL RULES:** Every keyword must pass these tests:
     ✅ Is it in the article or strongly implied?
     ✅ Would searching this term lead users to THIS article?
     ✅ Does it match the article's specific angle/story?
+    ✅ **DATES/YEARS ARE ACCURATE** - Never hallucinate or use wrong years!
+
+    **⚠️ TEMPORAL ACCURACY (CRITICAL):**
+    - Extract dates/years EXACTLY as mentioned in article
+    - If article says "upcoming February election" → Infer correct FUTURE year from context
+    - If article mentions "2026 election" → Use 2026, NOT 2024 or other years!
+    - Context clues: "upcoming", "next", "planned for" → Future dates
+    - NEVER use past years (2024, 2023, 2022) for future events
+    - If unsure of exact year, use month/event only: "February election"
+    - For questions, match the article's timeframe: "when will election be 2026" NOT "2024"
+
+    **Examples:**
+    ❌ WRONG: "2024 election" (if article clearly mentions 2026 or "upcoming" for future)
+    ✅ CORRECT: "2026 election" (matches article's actual timeframe)
+    ❌ WRONG: "when will referendum be 2024" (hallucinated old year)
+    ✅ CORRECT: "when will referendum be 2026" (correct year from article)
 
     **A. PRIMARY KEYWORDS (2-5 keywords):**
         - **What:** Main topics, events, or entities this article is about
@@ -567,6 +600,7 @@ const generatePrompt = (articleContent: string, contentType: string): string => 
     ✅ Rationales explain article connection + search relevance
     ✅ Questions are directly answerable by the article
     ✅ All entities mentioned in article are extracted
+    ✅ **All dates/years are ACCURATE** - no wrong or hallucinated years!
 
     **OUTPUT FORMAT - CRITICAL:** 
     
@@ -676,6 +710,7 @@ const generatePrompt = (articleContent: string, contentType: string): string => 
     - Balance article-relevance with search-worthiness
     - Make this SPECIFIC article rank, not just any article on the topic
     - Quality over quantity - each keyword should earn its place
+    - **DATES/YEARS MUST BE ACCURATE** - Extract exact years from article, never hallucinate!
   `;
 };
 
