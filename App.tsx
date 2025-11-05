@@ -1,6 +1,12 @@
 import React, { useState, useCallback, useRef } from 'react';
 import { generateKeywords } from './services/geminiService';
 import { generateKeywordsWithOpenAI } from './services/openaiService';
+import {
+  getDataForSEOConfig,
+  saveDataForSEOConfig,
+  clearDataForSEOConfig,
+  testDataForSEOConnection
+} from './services/dataForSeoService';
 import type { KeywordResult } from './types';
 import { KeywordCard } from './components/KeywordCard';
 import Loader from './components/Loader';
@@ -21,7 +27,18 @@ const App: React.FC = () => {
   const [openaiApiKey, setOpenaiApiKey] = useState<string>(() => {
     return localStorage.getItem('openai_api_key') || '';
   });
-  
+
+  // DataForSEO API credentials (optional - for real search volume data)
+  const [dataForSEOLogin, setDataForSEOLogin] = useState<string>(() => {
+    const config = getDataForSEOConfig();
+    return config.login || '';
+  });
+  const [dataForSEOPassword, setDataForSEOPassword] = useState<string>(() => {
+    const config = getDataForSEOConfig();
+    return config.password || '';
+  });
+  const [showDataForSEO, setShowDataForSEO] = useState(false);
+
   // Ref to track and cancel in-flight requests
   const abortControllerRef = useRef<AbortController | null>(null);
 
@@ -403,9 +420,9 @@ const App: React.FC = () => {
                   <div className="mt-4">
                     <label className="block text-sm font-medium text-gray-300 mb-2">
                       OpenAI API Key
-                      <a 
-                        href="https://platform.openai.com/api-keys" 
-                        target="_blank" 
+                      <a
+                        href="https://platform.openai.com/api-keys"
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="ml-2 text-xs text-brand-primary hover:underline"
                       >
@@ -425,6 +442,115 @@ const App: React.FC = () => {
                     />
                     <p className="text-xs text-gray-500 mt-1">
                       Your API key is stored locally and never sent to our servers.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* DataForSEO API Configuration (Optional) */}
+              <div className="mt-4 p-4 bg-brand-card border border-cyan-500/50 rounded-lg">
+                <div className="flex items-center justify-between mb-3">
+                  <label className="block text-sm font-medium text-cyan-300">
+                    📊 Real Search Volume Data (Optional)
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => setShowDataForSEO(!showDataForSEO)}
+                    className="text-xs text-cyan-400 hover:underline"
+                  >
+                    {showDataForSEO ? 'Hide' : 'Configure'}
+                  </button>
+                </div>
+                <p className="text-xs text-gray-400 mb-2">
+                  💡 Enable DataForSEO API for REAL search volume data instead of AI estimates. Cost: ~$0.0001/keyword.
+                  {!showDataForSEO && getDataForSEOConfig().enabled && (
+                    <span className="ml-2 text-green-400">✅ Configured</span>
+                  )}
+                </p>
+
+                {showDataForSEO && (
+                  <div className="space-y-3 mt-3">
+                    <div>
+                      <label className="block text-xs font-medium text-gray-300 mb-1">
+                        API Login (Username)
+                        <a
+                          href="https://app.dataforseo.com/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="ml-2 text-cyan-400 hover:underline"
+                        >
+                          (Get API Key)
+                        </a>
+                      </label>
+                      <input
+                        type="text"
+                        value={dataForSEOLogin}
+                        onChange={(e) => setDataForSEOLogin(e.target.value)}
+                        placeholder="your-login@example.com"
+                        className="w-full p-2 text-sm bg-brand-bg border border-brand-border rounded-md focus:ring-2 focus:ring-cyan-500 focus:outline-none transition-all"
+                        disabled={isLoading}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-gray-300 mb-1">
+                        API Password
+                      </label>
+                      <input
+                        type="password"
+                        value={dataForSEOPassword}
+                        onChange={(e) => setDataForSEOPassword(e.target.value)}
+                        placeholder="your-api-password"
+                        className="w-full p-2 text-sm bg-brand-bg border border-brand-border rounded-md focus:ring-2 focus:ring-cyan-500 focus:outline-none transition-all"
+                        disabled={isLoading}
+                      />
+                    </div>
+                    <div className="flex gap-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (dataForSEOLogin && dataForSEOPassword) {
+                            saveDataForSEOConfig(dataForSEOLogin, dataForSEOPassword);
+                            alert('✅ DataForSEO credentials saved! Real search volume data will be used.');
+                          } else {
+                            alert('⚠️ Please enter both login and password');
+                          }
+                        }}
+                        className="flex-1 text-xs bg-cyan-600 hover:bg-cyan-700 text-white py-2 px-3 rounded-md transition-colors"
+                        disabled={isLoading}
+                      >
+                        Save Credentials
+                      </button>
+                      <button
+                        type="button"
+                        onClick={async () => {
+                          const connected = await testDataForSEOConnection();
+                          if (connected) {
+                            alert('✅ DataForSEO API connected successfully! Check console for account balance.');
+                          } else {
+                            alert('❌ Connection failed. Check your credentials.');
+                          }
+                        }}
+                        className="flex-1 text-xs bg-blue-600 hover:bg-blue-700 text-white py-2 px-3 rounded-md transition-colors"
+                        disabled={isLoading || !getDataForSEOConfig().enabled}
+                      >
+                        Test Connection
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          clearDataForSEOConfig();
+                          setDataForSEOLogin('');
+                          setDataForSEOPassword('');
+                          alert('DataForSEO credentials cleared. Using AI estimates.');
+                        }}
+                        className="text-xs bg-red-600 hover:bg-red-700 text-white py-2 px-3 rounded-md transition-colors"
+                        disabled={isLoading}
+                      >
+                        Clear
+                      </button>
+                    </div>
+                    <p className="text-xs text-gray-500">
+                      🔒 Credentials stored locally. Never shared. App works without DataForSEO.
                     </p>
                   </div>
                 )}
@@ -490,6 +616,90 @@ const App: React.FC = () => {
                   </div>
                 )}
 
+                {/* Ranking Confidence - NEW */}
+                {result.rankingConfidence && (
+                  <div className="bg-gradient-to-r from-purple-900/50 to-pink-900/50 border-2 border-purple-500/50 rounded-xl shadow-2xl p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-xl font-bold text-purple-300">🎯 Ranking Confidence</h3>
+                      <div className="text-4xl font-extrabold text-purple-400">{result.rankingConfidence.overall}%</div>
+                    </div>
+                    <div className="h-3 bg-gray-700 rounded-full overflow-hidden mb-4">
+                      <div
+                        className={`h-full rounded-full ${
+                          result.rankingConfidence.overall >= 80 ? 'bg-green-500' :
+                          result.rankingConfidence.overall >= 65 ? 'bg-yellow-500' :
+                          result.rankingConfidence.overall >= 50 ? 'bg-orange-500' :
+                          'bg-red-500'
+                        }`}
+                        style={{ width: `${result.rankingConfidence.overall}%` }}
+                      ></div>
+                    </div>
+
+                    {/* Confidence Factors */}
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
+                      <div className="bg-brand-bg p-3 rounded border border-purple-500/30">
+                        <div className="text-xs text-gray-400">Search Volume</div>
+                        <div className="text-lg font-bold text-purple-300">{result.rankingConfidence.factors.searchVolume}%</div>
+                      </div>
+                      <div className="bg-brand-bg p-3 rounded border border-purple-500/30">
+                        <div className="text-xs text-gray-400">Winnability</div>
+                        <div className="text-lg font-bold text-green-300">{result.rankingConfidence.factors.difficulty}%</div>
+                      </div>
+                      <div className="bg-brand-bg p-3 rounded border border-purple-500/30">
+                        <div className="text-xs text-gray-400">Relevance</div>
+                        <div className="text-lg font-bold text-blue-300">{result.rankingConfidence.factors.articleRelevance}%</div>
+                      </div>
+                      <div className="bg-brand-bg p-3 rounded border border-purple-500/30">
+                        <div className="text-xs text-gray-400">Domain Authority</div>
+                        <div className="text-lg font-bold text-yellow-300">{result.rankingConfidence.factors.domainAuthority}</div>
+                      </div>
+                      <div className="bg-brand-bg p-3 rounded border border-purple-500/30">
+                        <div className="text-xs text-gray-400">Freshness Bonus</div>
+                        <div className="text-lg font-bold text-orange-300">+{result.rankingConfidence.factors.freshnessBonus}</div>
+                      </div>
+                      {result.dataSourceUsed && (
+                        <div className="bg-brand-bg p-3 rounded border border-purple-500/30">
+                          <div className="text-xs text-gray-400">Data Source</div>
+                          <div className="text-xs font-bold text-cyan-300">
+                            {result.dataSourceUsed === 'dataforseo-api' ? '📊 Real API Data' : '🤖 AI Estimates'}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Top Keywords Predictions */}
+                    <div className="bg-brand-bg p-4 rounded border border-purple-500/30">
+                      <h4 className="text-sm font-bold text-purple-300 mb-3">🏆 Top 5 Keywords - Estimated Rankings</h4>
+                      <div className="space-y-2">
+                        {result.rankingConfidence.topKeywords.map((kw, idx) => (
+                          <div key={idx} className="flex items-center justify-between text-sm">
+                            <div className="flex items-center gap-2 flex-1 min-w-0">
+                              <span className="text-gray-400">#{idx + 1}</span>
+                              <span className="text-gray-300 truncate">{kw.term}</span>
+                            </div>
+                            <div className="flex items-center gap-3 ml-2">
+                              <span className={`text-xs font-bold px-2 py-1 rounded ${
+                                kw.estimatedRank === '#1' ? 'bg-green-900/50 text-green-300' :
+                                kw.estimatedRank === 'Top 3' ? 'bg-blue-900/50 text-blue-300' :
+                                kw.estimatedRank === 'Top 5' ? 'bg-yellow-900/50 text-yellow-300' :
+                                kw.estimatedRank === 'Top 10' ? 'bg-orange-900/50 text-orange-300' :
+                                'bg-gray-900/50 text-gray-400'
+                              }`}>
+                                {kw.estimatedRank}
+                              </span>
+                              <span className="text-xs text-gray-500">{kw.confidence}%</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <p className="mt-3 text-xs text-gray-400">
+                      💡 Ranking confidence is based on search volume, keyword difficulty, article relevance, domain authority, and freshness factors.
+                    </p>
+                  </div>
+                )}
+
                 {/* SEO Score & Meta Tags - Priority Section */}
                 {result.seoScore && (
                   <div className="bg-gradient-to-r from-blue-900/50 to-purple-900/50 border-2 border-blue-500/50 rounded-xl shadow-2xl p-6">
@@ -498,7 +708,7 @@ const App: React.FC = () => {
                       <div className="text-4xl font-extrabold text-blue-400">{result.seoScore}/100</div>
                     </div>
                     <div className="h-3 bg-gray-700 rounded-full overflow-hidden">
-                      <div 
+                      <div
                         className={`h-full rounded-full ${result.seoScore >= 80 ? 'bg-green-500' : result.seoScore >= 60 ? 'bg-yellow-500' : 'bg-red-500'}`}
                         style={{ width: `${result.seoScore}%` }}
                       ></div>

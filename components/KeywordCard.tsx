@@ -63,12 +63,35 @@ const KeywordPill: React.FC<{ keyword: Keyword }> = ({ keyword }) => {
         )}
         <strong className="font-bold text-white block mb-1">Rationale:</strong>
         <p style={isBilingual ? {fontFamily: "'SolaimanLipi', 'Kalpurush', 'Noto Sans Bengali', sans-serif"} : {}}>{keyword.rationale}</p>
-        {keyword.searchIntent && (
-          <p className="mt-2 text-xs"><strong>Search Intent:</strong> {keyword.searchIntent}</p>
-        )}
-        {keyword.searchVolume && (
-          <p className="text-xs"><strong>Search Volume:</strong> {keyword.searchVolume}</p>
-        )}
+        <div className="mt-2 space-y-1">
+          {keyword.searchIntent && (
+            <p className="text-xs"><strong>Search Intent:</strong> {keyword.searchIntent}</p>
+          )}
+          {keyword.searchVolumeNumeric && (
+            <p className="text-xs"><strong>Search Volume:</strong> {keyword.searchVolumeNumeric.toLocaleString()}/month (Real Data 📊)</p>
+          )}
+          {!keyword.searchVolumeNumeric && keyword.searchVolume && (
+            <p className="text-xs"><strong>Search Volume:</strong> {keyword.searchVolume} (Estimated)</p>
+          )}
+          {keyword.difficultyScore !== undefined && (
+            <p className="text-xs">
+              <strong>Difficulty:</strong> {keyword.difficultyScore}/100
+              {keyword.winnability && (
+                <span className={`ml-2 font-semibold ${
+                  keyword.winnability === 'Easy' ? 'text-green-400' :
+                  keyword.winnability === 'Medium' ? 'text-yellow-400' :
+                  keyword.winnability === 'Hard' ? 'text-orange-400' :
+                  'text-red-400'
+                }`}>
+                  {keyword.winnability === 'Easy' ? '✅ Easy to Rank' :
+                   keyword.winnability === 'Medium' ? '⚠️ Medium' :
+                   keyword.winnability === 'Hard' ? '🔥 Competitive' :
+                   '⛔ Very Hard'}
+                </span>
+              )}
+            </p>
+          )}
+        </div>
         <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-x-8 border-x-transparent border-t-8 border-t-brand-dark"></div>
       </div>
     </div>

@@ -1,6 +1,15 @@
 
 import { GoogleGenAI } from "@google/genai";
 import type { KeywordResult, GroundingChunk, Keyword } from '../types';
+import {
+  enhanceKeywords,
+  calculateRankingConfidence,
+  removeDuplicateKeywords
+} from './keywordUtils';
+import {
+  enhanceKeywordsWithRealData,
+  getDataForSEOConfig
+} from './dataForSeoService';
 
 if (!process.env.API_KEY) {
   throw new Error("API_KEY environment variable not set. Please set GEMINI_API_KEY in your .env.local file.");
@@ -74,11 +83,11 @@ const validateKeywordResult = (data: any): data is Omit<KeywordResult, 'searchRe
     return allValid;
   };
 
-  // Core required fields with VERY FLEXIBLE quantities (quality over quantity)
+  // Core required fields with CONSISTENT quantities for world-class SEO
   const coreValid = (
-    validateKeywordArray(data.primary, 1, 10, 'Target Focus keywords (1-10, flexible based on article scope)') &&
-    validateKeywordArray(data.secondary, 2, 20, 'Supporting Topic keywords (2-20, flexible based on complexity)') &&
-    validateKeywordArray(data.longtail, 3, 30, 'User Query Variations (3-30, flexible based on content richness)') &&
+    validateKeywordArray(data.primary, 3, 5, 'Target Focus keywords (3-5 HIGH-VOLUME head terms)') &&
+    validateKeywordArray(data.secondary, 5, 12, 'Supporting Topic keywords (5-12 medium-volume related terms)') &&
+    validateKeywordArray(data.longtail, 8, 20, 'User Query Variations (8-20 long-tail questions)') &&
     typeof data.competitorInsights === 'string' &&
     data.competitorInsights.trim().length > 0
   );
@@ -823,7 +832,7 @@ export const generateKeywords = async (
       
       throw new Error(
         `AI response has invalid keyword counts. ` +
-        `Expected: Target Focus (1-10), Supporting Topics (2-20), User Query Variations (3-30). ` +
+        `Expected: Target Focus (3-5), Supporting Topics (5-12), User Query Variations (8-20). ` +
         `Received: Target Focus (${counts.primary}), Supporting Topics (${counts.secondary}), User Queries (${counts.longtail}). ` +
         `This usually indicates the AI didn't extract enough keywords from the article. ` +
         `Please try again or use Deep Analysis mode for better results.`
@@ -831,14 +840,61 @@ export const generateKeywords = async (
     }
 
     // Extract grounding chunks safely
-    const groundingChunks: GroundingChunk[] = 
+    const groundingChunks: GroundingChunk[] =
       response.candidates?.[0]?.groundingMetadata?.groundingChunks || [];
 
-    return { 
-      ...parsedResult, 
-      searchReferences: groundingChunks, 
+    console.log("🔧 Applying keyword enhancements (deduplication, difficulty scoring)...");
+
+    // STEP 1: Remove duplicate/similar keywords within each category
+    let primary = removeDuplicateKeywords(parsedResult.primary || [], 0.8);
+    let secondary = removeDuplicateKeywords(parsedResult.secondary || [], 0.8);
+    let longtail = removeDuplicateKeywords(parsedResult.longtail || [], 0.8);
+
+    // STEP 2: Try to get REAL search volume and difficulty from DataForSEO API (optional)
+    let dataSource: 'gemini-estimate' | 'dataforseo-api' = 'gemini-estimate';
+    const dataForSEOConfig = getDataForSEOConfig();
+
+    if (dataForSEOConfig.enabled) {
+      console.log("📊 DataForSEO API enabled - fetching real metrics...");
+
+      // Enhance all keywords with real data
+      const allKeywords = [...primary, ...secondary, ...longtail];
+      const enhanced = await enhanceKeywordsWithRealData(allKeywords, 2050); // Bangladesh
+
+      if (enhanced.dataSource === 'dataforseo-api') {
+        console.log("✅ Real search volume data retrieved from DataForSEO");
+        dataSource = 'dataforseo-api';
+
+        // Split back into categories
+        primary = enhanced.keywords.slice(0, primary.length);
+        secondary = enhanced.keywords.slice(primary.length, primary.length + secondary.length);
+        longtail = enhanced.keywords.slice(primary.length + secondary.length);
+      }
+    } else {
+      console.log("ℹ️  DataForSEO API not configured - using Gemini estimates + calculated difficulty");
+    }
+
+    // STEP 3: Enhance keywords with estimated difficulty (if not from DataForSEO)
+    primary = enhanceKeywords(primary, 'primary');
+    secondary = enhanceKeywords(secondary, 'secondary');
+    longtail = enhanceKeywords(longtail, 'longtail');
+
+    // STEP 4: Calculate ranking confidence
+    const rankingConfidence = calculateRankingConfidence(primary, secondary, longtail, 80); // Daily Star DA = 80
+
+    console.log(`✅ Keyword enhancement complete! Overall ranking confidence: ${rankingConfidence.overall}%`);
+    console.log(`🎯 Top keyword: "${rankingConfidence.topKeywords[0]?.term}" (${rankingConfidence.topKeywords[0]?.estimatedRank})`);
+
+    return {
+      ...parsedResult,
+      primary,
+      secondary,
+      longtail,
+      searchReferences: groundingChunks,
       contentType,
-      detectedLanguage 
+      detectedLanguage,
+      rankingConfidence,
+      dataSourceUsed: dataSource
     };
 
   } catch (error) {
