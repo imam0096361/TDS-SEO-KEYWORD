@@ -661,7 +661,9 @@ const App: React.FC = () => {
                         <div className="bg-brand-bg p-3 rounded border border-purple-500/30">
                           <div className="text-xs text-gray-400">Data Source</div>
                           <div className="text-xs font-bold text-cyan-300">
-                            {result.dataSourceUsed === 'dataforseo-api' ? '📊 Real API Data' : '🤖 AI Estimates'}
+                            {result.dataSourceUsed === 'google-data' ? '🔍 Google Search (FREE)' :
+                             result.dataSourceUsed === 'dataforseo-api' ? '📊 DataForSEO API' :
+                             '🤖 AI Estimates'}
                           </div>
                         </div>
                       )}

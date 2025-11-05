@@ -52,7 +52,7 @@ export interface KeywordResult {
   serpFeatureTargets?: string[];
   localSeoSignals?: string[];
   rankingConfidence?: RankingConfidence;  // NEW: Ranking predictions
-  dataSourceUsed?: 'gemini-estimate' | 'dataforseo-api';  // Which data source
+  dataSourceUsed?: 'gemini-estimate' | 'dataforseo-api' | 'google-data';  // Which data source
   // Bilingual/Bangla-specific fields
   detectedLanguage?: 'english' | 'bangla' | 'mixed';
   metaTitleBangla?: string;           // Bangla version of meta title

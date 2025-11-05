@@ -7,6 +7,10 @@ import {
   removeDuplicateKeywords
 } from './keywordUtils';
 import {
+  enhanceKeywordsWithGoogleData,
+  getGoogleSearchConfig
+} from './googleSearchService';
+import {
   enhanceKeywordsWithRealData,
   getDataForSEOConfig
 } from './dataForSeoService';
@@ -866,28 +870,44 @@ export const generateKeywords = async (
     let secondary = removeDuplicateKeywords(Array.isArray(parsedResult.secondary) ? parsedResult.secondary : [], 0.8);
     let longtail = removeDuplicateKeywords(Array.isArray(parsedResult.longtail) ? parsedResult.longtail : [], 0.8);
 
-    // STEP 2: Try to get REAL search volume and difficulty from DataForSEO API (optional)
-    let dataSource: 'gemini-estimate' | 'dataforseo-api' = 'gemini-estimate';
-    const dataForSEOConfig = getDataForSEOConfig();
+    // STEP 2: Try to get REAL search volume and difficulty
+    // Priority: Google Search API (FREE) > DataForSEO (paid) > Gemini estimates
+    let dataSource: 'gemini-estimate' | 'dataforseo-api' | 'google-data' = 'gemini-estimate';
+    const allKeywords = [...primary, ...secondary, ...longtail];
 
-    if (dataForSEOConfig.enabled) {
-      console.log("📊 DataForSEO API enabled - fetching real metrics...");
+    // Try Google Search data first (FREE!)
+    console.log("🔍 Attempting to enhance with Google Search data (FREE)...");
+    const googleEnhanced = await enhanceKeywordsWithGoogleData(allKeywords);
 
-      // Enhance all keywords with real data
-      const allKeywords = [...primary, ...secondary, ...longtail];
-      const enhanced = await enhanceKeywordsWithRealData(allKeywords, 2050); // Bangladesh
+    if (googleEnhanced.dataSource === 'google-data') {
+      console.log("✅ Enhanced with Google Search data (Trends + Custom Search)");
+      dataSource = 'google-data';
 
-      if (enhanced.dataSource === 'dataforseo-api') {
-        console.log("✅ Real search volume data retrieved from DataForSEO");
-        dataSource = 'dataforseo-api';
+      // Split back into categories
+      primary = googleEnhanced.keywords.slice(0, primary.length);
+      secondary = googleEnhanced.keywords.slice(primary.length, primary.length + secondary.length);
+      longtail = googleEnhanced.keywords.slice(primary.length + secondary.length);
 
-        // Split back into categories
-        primary = enhanced.keywords.slice(0, primary.length);
-        secondary = enhanced.keywords.slice(primary.length, primary.length + secondary.length);
-        longtail = enhanced.keywords.slice(primary.length + secondary.length);
-      }
     } else {
-      console.log("ℹ️  DataForSEO API not configured - using Gemini estimates + calculated difficulty");
+      // Fallback to DataForSEO if Google data not available
+      const dataForSEOConfig = getDataForSEOConfig();
+
+      if (dataForSEOConfig.enabled) {
+        console.log("📊 DataForSEO API enabled - fetching real metrics...");
+
+        const enhanced = await enhanceKeywordsWithRealData(allKeywords, 2050);
+
+        if (enhanced.dataSource === 'dataforseo-api') {
+          console.log("✅ Real search volume data retrieved from DataForSEO");
+          dataSource = 'dataforseo-api';
+
+          primary = enhanced.keywords.slice(0, primary.length);
+          secondary = enhanced.keywords.slice(primary.length, primary.length + secondary.length);
+          longtail = enhanced.keywords.slice(primary.length + secondary.length);
+        }
+      } else {
+        console.log("ℹ️  No external APIs configured - using Gemini estimates + calculated difficulty");
+      }
     }
 
     // STEP 3: Enhance keywords with estimated difficulty (if not from DataForSEO)
