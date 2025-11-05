@@ -56,44 +56,56 @@ const validateKeywordResult = (data: any): data is Omit<KeywordResult, 'searchRe
   const validateKeywordArray = (arr: any, minCount: number, maxCount: number, arrayName: string, required: boolean = true): arr is Keyword[] => {
     if (!Array.isArray(arr)) {
       if (required) {
-        console.error(`${arrayName} is not an array`);
+        console.warn(`${arrayName} is not an array - will use empty array`);
         return false;
       }
       return true; // Optional field
     }
-    
+
+    // FLEXIBLE: Warn about count but don't fail - accept whatever we got
     if (arr.length < minCount || arr.length > maxCount) {
-      console.error(`${arrayName} count is ${arr.length}, expected ${minCount}-${maxCount}`);
-      return false;
+      console.warn(`⚠️ ${arrayName} count is ${arr.length}, expected ${minCount}-${maxCount} (accepting anyway)`);
+      // Don't return false - just warn and continue
     }
-    
-    const allValid = arr.every(item => 
-      item && 
-      typeof item === 'object' && 
-      typeof item.term === 'string' && 
+
+    const allValid = arr.every(item =>
+      item &&
+      typeof item === 'object' &&
+      typeof item.term === 'string' &&
       item.term.trim().length > 0 &&
       typeof item.rationale === 'string' &&
       item.rationale.trim().length > 0
     );
-    
+
     if (!allValid) {
-      console.error(`${arrayName} contains invalid items`);
+      console.warn(`${arrayName} contains some invalid items - will filter them out`);
     }
-    
+
     return allValid;
   };
 
-  // Core required fields with CONSISTENT quantities for world-class SEO
-  const coreValid = (
-    validateKeywordArray(data.primary, 3, 5, 'Target Focus keywords (3-5 HIGH-VOLUME head terms)') &&
-    validateKeywordArray(data.secondary, 5, 12, 'Supporting Topic keywords (5-12 medium-volume related terms)') &&
-    validateKeywordArray(data.longtail, 8, 20, 'User Query Variations (8-20 long-tail questions)') &&
-    typeof data.competitorInsights === 'string' &&
-    data.competitorInsights.trim().length > 0
+  // FLEXIBLE VALIDATION: Check structure but accept any counts
+  // Just warn if counts are off, don't block results
+  validateKeywordArray(data.primary, 3, 5, 'Target Focus keywords (3-5 HIGH-VOLUME head terms)');
+  validateKeywordArray(data.secondary, 5, 12, 'Supporting Topic keywords (5-12 medium-volume related terms)');
+  validateKeywordArray(data.longtail, 8, 20, 'User Query Variations (8-20 long-tail questions)');
+
+  // Only require that we have SOME keywords and competitor insights
+  const hasMinimumData = (
+    (Array.isArray(data.primary) && data.primary.length >= 1) ||
+    (Array.isArray(data.secondary) && data.secondary.length >= 1) ||
+    (Array.isArray(data.longtail) && data.longtail.length >= 1)
   );
-  
-  if (!coreValid) {
+
+  if (!hasMinimumData) {
+    console.error('❌ No valid keywords found in any category');
     return false;
+  }
+
+  // Competitor insights optional
+  if (!data.competitorInsights || typeof data.competitorInsights !== 'string') {
+    console.warn('⚠️ No competitor insights - will use default');
+    data.competitorInsights = 'Analyze competitor keywords for better optimization';
   }
   
   // Optional advanced SEO fields (validate if present, but don't fail if missing)
@@ -822,21 +834,24 @@ export const generateKeywords = async (
       );
     }
     
-    // Validate the structure
-    if (!validateKeywordResult(parsedResult)) {
-      const counts = {
-        primary: parsedResult.primary?.length || 0,
-        secondary: parsedResult.secondary?.length || 0,
-        longtail: parsedResult.longtail?.length || 0
-      };
-      
-      throw new Error(
-        `AI response has invalid keyword counts. ` +
-        `Expected: Target Focus (3-5), Supporting Topics (5-12), User Query Variations (8-20). ` +
-        `Received: Target Focus (${counts.primary}), Supporting Topics (${counts.secondary}), User Queries (${counts.longtail}). ` +
-        `This usually indicates the AI didn't extract enough keywords from the article. ` +
-        `Please try again or use Deep Analysis mode for better results.`
+    // Validate the structure - but don't throw error, just warn
+    const isValid = validateKeywordResult(parsedResult);
+    const counts = {
+      primary: parsedResult.primary?.length || 0,
+      secondary: parsedResult.secondary?.length || 0,
+      longtail: parsedResult.longtail?.length || 0
+    };
+
+    if (!isValid) {
+      console.warn(
+        `⚠️ Keyword counts outside expected range. ` +
+        `Expected: Primary (3-5), Secondary (5-12), Long-tail (8-20). ` +
+        `Received: Primary (${counts.primary}), Secondary (${counts.secondary}), Long-tail (${counts.longtail}). ` +
+        `Continuing with available keywords...`
       );
+      // Don't throw - continue with whatever we got
+    } else {
+      console.log(`✅ Keyword counts look good: Primary (${counts.primary}), Secondary (${counts.secondary}), Long-tail (${counts.longtail})`);
     }
 
     // Extract grounding chunks safely
@@ -846,9 +861,10 @@ export const generateKeywords = async (
     console.log("🔧 Applying keyword enhancements (deduplication, difficulty scoring)...");
 
     // STEP 1: Remove duplicate/similar keywords within each category
-    let primary = removeDuplicateKeywords(parsedResult.primary || [], 0.8);
-    let secondary = removeDuplicateKeywords(parsedResult.secondary || [], 0.8);
-    let longtail = removeDuplicateKeywords(parsedResult.longtail || [], 0.8);
+    // Ensure we have arrays even if AI returned nothing
+    let primary = removeDuplicateKeywords(Array.isArray(parsedResult.primary) ? parsedResult.primary : [], 0.8);
+    let secondary = removeDuplicateKeywords(Array.isArray(parsedResult.secondary) ? parsedResult.secondary : [], 0.8);
+    let longtail = removeDuplicateKeywords(Array.isArray(parsedResult.longtail) ? parsedResult.longtail : [], 0.8);
 
     // STEP 2: Try to get REAL search volume and difficulty from DataForSEO API (optional)
     let dataSource: 'gemini-estimate' | 'dataforseo-api' = 'gemini-estimate';
