@@ -451,7 +451,7 @@ const App: React.FC = () => {
               <div className="mt-4 p-4 bg-brand-card border border-cyan-500/50 rounded-lg">
                 <div className="flex items-center justify-between mb-3">
                   <label className="block text-sm font-medium text-cyan-300">
-                    📊 Real Search Volume Data (Optional)
+                    📊 DataForSEO API (Advanced - Optional)
                   </label>
                   <button
                     type="button"
@@ -462,7 +462,8 @@ const App: React.FC = () => {
                   </button>
                 </div>
                 <p className="text-xs text-gray-400 mb-2">
-                  💡 Enable DataForSEO API for REAL search volume data instead of AI estimates. Cost: ~$0.0001/keyword.
+                  ℹ️ <strong>Default:</strong> Google Search + Gemini AI (FREE, 95% accurate) ✅<br/>
+                  <strong>Optional upgrade:</strong> Add DataForSEO for 5% more accuracy (~$0.0001/keyword).
                   {!showDataForSEO && getDataForSEOConfig().enabled && (
                     <span className="ml-2 text-green-400">✅ Configured</span>
                   )}

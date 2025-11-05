@@ -870,17 +870,17 @@ export const generateKeywords = async (
     let secondary = removeDuplicateKeywords(Array.isArray(parsedResult.secondary) ? parsedResult.secondary : [], 0.8);
     let longtail = removeDuplicateKeywords(Array.isArray(parsedResult.longtail) ? parsedResult.longtail : [], 0.8);
 
-    // STEP 2: Try to get REAL search volume and difficulty
-    // Priority: Google Search API (FREE) > DataForSEO (paid) > Gemini estimates
+    // STEP 2: HYBRID APPROACH - Combine Google Search + Gemini AI (BEST)
+    // DataForSEO is OPTIONAL (only if user explicitly configures)
     let dataSource: 'gemini-estimate' | 'dataforseo-api' | 'google-data' = 'gemini-estimate';
     const allKeywords = [...primary, ...secondary, ...longtail];
 
-    // Try Google Search data first (FREE!)
-    console.log("🔍 Attempting to enhance with Google Search data (FREE)...");
+    // PRIMARY METHOD: Google Search data (FREE, always try first)
+    console.log("🔍 Enhancing with Google Search data (FREE + Gemini AI hybrid)...");
     const googleEnhanced = await enhanceKeywordsWithGoogleData(allKeywords);
 
     if (googleEnhanced.dataSource === 'google-data') {
-      console.log("✅ Enhanced with Google Search data (Trends + Custom Search)");
+      console.log("✅ BEST: Google Search + Gemini AI hybrid data");
       dataSource = 'google-data';
 
       // Split back into categories
@@ -889,31 +889,39 @@ export const generateKeywords = async (
       longtail = googleEnhanced.keywords.slice(primary.length + secondary.length);
 
     } else {
-      // Fallback to DataForSEO if Google data not available
-      const dataForSEOConfig = getDataForSEOConfig();
+      // Google data not available, use pure Gemini estimates
+      console.log("ℹ️  Using Gemini AI estimates (Google Trends unavailable)");
 
-      if (dataForSEOConfig.enabled) {
-        console.log("📊 DataForSEO API enabled - fetching real metrics...");
+      // Still apply Gemini-based difficulty scoring
+      primary = enhanceKeywords(primary, 'primary');
+      secondary = enhanceKeywords(secondary, 'secondary');
+      longtail = enhanceKeywords(longtail, 'longtail');
+    }
 
-        const enhanced = await enhanceKeywordsWithRealData(allKeywords, 2050);
+    // OPTIONAL: DataForSEO (only if user explicitly configured it)
+    // Most users won't use this - Google + Gemini is enough
+    const dataForSEOConfig = getDataForSEOConfig();
+    if (dataForSEOConfig.enabled) {
+      console.log("📊 OPTIONAL: DataForSEO API configured, refining estimates...");
 
-        if (enhanced.dataSource === 'dataforseo-api') {
-          console.log("✅ Real search volume data retrieved from DataForSEO");
-          dataSource = 'dataforseo-api';
+      const enhanced = await enhanceKeywordsWithRealData(allKeywords, 2050);
 
-          primary = enhanced.keywords.slice(0, primary.length);
-          secondary = enhanced.keywords.slice(primary.length, primary.length + secondary.length);
-          longtail = enhanced.keywords.slice(primary.length + secondary.length);
-        }
-      } else {
-        console.log("ℹ️  No external APIs configured - using Gemini estimates + calculated difficulty");
+      if (enhanced.dataSource === 'dataforseo-api') {
+        console.log("✅ Refined with DataForSEO real data");
+        dataSource = 'dataforseo-api';
+
+        primary = enhanced.keywords.slice(0, primary.length);
+        secondary = enhanced.keywords.slice(primary.length, primary.length + secondary.length);
+        longtail = enhanced.keywords.slice(primary.length + secondary.length);
       }
     }
 
-    // STEP 3: Enhance keywords with estimated difficulty (if not from DataForSEO)
-    primary = enhanceKeywords(primary, 'primary');
-    secondary = enhanceKeywords(secondary, 'secondary');
-    longtail = enhanceKeywords(longtail, 'longtail');
+    // STEP 3: Final enhancement pass (if not already enhanced by Google/DataForSEO)
+    if (dataSource === 'gemini-estimate') {
+      primary = enhanceKeywords(primary, 'primary');
+      secondary = enhanceKeywords(secondary, 'secondary');
+      longtail = enhanceKeywords(longtail, 'longtail');
+    }
 
     // STEP 4: Calculate ranking confidence
     const rankingConfidence = calculateRankingConfidence(primary, secondary, longtail, 80); // Daily Star DA = 80
